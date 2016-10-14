@@ -149,12 +149,12 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                3
+                4
                 <span>posts</span>
             </div>
             <div class="article-info-block">
-                1
-                <span>tag</span>
+                2
+                <span>tags</span>
             </div>
         </div>
         
@@ -178,6 +178,152 @@
 
             
             <section id="main">
+    <article id="post-迷之抓虫" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2016/10/14/迷之抓虫/">迷之抓虫</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2016/10/14/迷之抓虫/">
+            <time datetime="2016-10-14T14:14:57.113Z" itemprop="datePublished">2016-10-14</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/FE/">FE</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Vue/">Vue</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>今天花了几个小时修了个公司项目的bug，起因是这样， 公司老板拿去测试发现文本框输入文本， 在失去焦点之后输入的内容就没了, 另外我看老板发的截图发现这个样式也有点不对, 尽管在电脑上测试一切正常, 在手机端的<code>chrome</code>也一切正常, 就在微信端和<code>QQ</code>浏览器会出现这种神奇的bug, 我表示很无语,  因为确信我没写过这种清空输入框的代码, 其他人应该也不会, 因为这个项目的与表单有关的基本都是我在做, 然后开始了抓虫之旅, 由于是单页应用为了方便测试我直接通过连接到那个出现bug的页面, 然后发现一切正常, 我就有点懵逼了, 然后我从开始页面进去, 一步步点进那个页面, 发现bug又出现了, 我开始猜测是不是中间有哪个页面做了什么不该做的事情, 所幸的是我又发现有一个页面跳转到bug页面并不会出现bug, 一切正常, 就是这么任性,  我…… 我开始猜测是不是跳转过来的页面导致的bug, 然后我就开始一段一段地注释代码, 一次又一次地刷新浏览器, 终于定位到bug所在之处,</p>
+<p>大概代码如下</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"radio"</span> <span class="attr">name</span>=<span class="string">"sex"</span> <span class="attr">value</span>=<span class="string">"男"</span> <span class="attr">v-el:man</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"radio"</span> <span class="attr">name</span>=<span class="string">"sex"</span> <span class="attr">value</span>=<span class="string">"女"</span> <span class="attr">v-el:female</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>我通过<code>API</code> 获取性别, 然后通过<code>v-el</code>来获取<code>DOM</code>元素设置某一个性别为默认值</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 省略了一些语句</span></div><div class="line"><span class="keyword">this</span>.$els.man.setAttribute(<span class="string">'checked'</span>, <span class="string">''</span>);</div><div class="line"><span class="keyword">this</span>.$els.female.setAttribute(<span class="string">'checked'</span>, <span class="string">''</span>);</div></pre></td></tr></table></figure>
+<p>在<code>vue</code>里面, 其实这样的写法很傻, <code>vue</code> 的核心思想是数据驱, 一般不直接操作<code>DOM</code>.</p>
+<p>我发现只要不进行<code>DOM</code> 操作就一切正常, 也就是说删除上面的代码, 那么原先的bug页面就一切正常, 然后我就开始想会不会是<code>v-el</code>的原因, 我给<code>html</code>加了个<code>class</code> 通过<code>js</code>来设置<code>checked</code>属性, 写完之后刷新还是发现不行,  懵逼ing…. 最后走投无路, 想可不可以换个方式设置<code>checked</code>属性, 而不是操作<code>DOM</code>,然后代码变成了这样</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"radio"</span> <span class="attr">name</span>=<span class="string">"sex"</span> <span class="attr">:checked</span>=<span class="string">"sex === '男'"</span> <span class="attr">value</span>=<span class="string">"男"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"radio"</span> <span class="attr">name</span>=<span class="string">"sex"</span> <span class="attr">:checked</span>=<span class="string">"sex === '女'"</span> <span class="attr">value</span>=<span class="string">"女"</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>然后刷新页面, bug修复完成. </p>
+<p>尽管修复了bug, 但是还是没有找到为什么之前的代码会导致后一个页面的样式改变和输入框失去焦点清空输入的问题, 还是感觉到很憋屈……</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
+<li>文档很重要, 要仔细看. 抛开这里场景不说, 后面一种的写法无疑要比之前的写法清晰很多, 这他妈还是官方示例啊</li>
+<li>bug快速定位分析  </li>
+</ul>
+<h4 id="ps"><a href="#ps" class="headerlink" title="ps"></a>ps</h4><p>之前那几篇找时间完善一下</p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://gavin-gong.github.io/2016/10/14/迷之抓虫/" data-id="ciu9vinby00005s5029615048" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="http://gavin-gong.github.io/2016/10/14/迷之抓虫/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://gavin-gong.github.io/2016/10/14/迷之抓虫/">Comments</a>
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
     <article id="post-promise" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -233,7 +379,7 @@
 
 </div>
 
-    <a data-url="http://gavin-gong.github.io/2016/10/13/promise/" data-id="ciu99zoed0006ds50vrquozf3" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://gavin-gong.github.io/2016/10/13/promise/" data-id="ciu9ad4iz0000j450yctj91xh" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -365,7 +511,7 @@
 
 </div>
 
-    <a data-url="http://gavin-gong.github.io/2016/10/11/fetch-api/" data-id="ciu99zobg0000ds503wud36xv" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://gavin-gong.github.io/2016/10/11/fetch-api/" data-id="ciu9ad4ld0006j450jcc7gwnn" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -508,7 +654,7 @@
 
 </div>
 
-    <a data-url="http://gavin-gong.github.io/2016/10/10/async-wait/" data-id="ciu99zocp0002ds50v4w2bvf9" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://gavin-gong.github.io/2016/10/10/async-wait/" data-id="ciu9ad4k10002j450rmu1sih0" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -599,6 +745,15 @@
                         
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/FE/">FE</a></p>
+                            <p class="item-title"><a href="/2016/10/14/迷之抓虫/" class="title">迷之抓虫</a></p>
+                            <p class="item-date"><time datetime="2016-10-14T14:14:57.113Z" itemprop="datePublished">2016-10-14</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/FE/">FE</a></p>
                             <p class="item-title"><a href="/2016/10/13/promise/" class="title">promise</a></p>
                             <p class="item-date"><time datetime="2016-10-13T12:38:36.006Z" itemprop="datePublished">2016-10-13</time></p>
                         </div>
@@ -631,7 +786,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">categories</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/FE/">FE</a><span class="category-list-count">3</span></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/FE/">FE</a><span class="category-list-count">4</span></li></ul>
         </div>
     </div>
 
@@ -640,7 +795,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">archives</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">3</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">4</span></li></ul>
         </div>
     </div>
 
@@ -649,7 +804,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">tags</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a><span class="tag-list-count">3</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/">Vue</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a><span class="tag-list-count">3</span></li></ul>
         </div>
     </div>
 
