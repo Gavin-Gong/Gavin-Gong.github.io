@@ -3,18 +3,14 @@
 <head>
     <meta charset="utf-8">
     
-    <title>promise | Feway</title>
+    <title>Tag: node | Feway</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="1234567891011121314151617let promise = new Promise((rsv, rjct) =&amp;gt; &amp;#123;  if (/*condition*/) &amp;#123;    rsv() //如果rsv()函数带参数, 会传递给下一个then  &amp;#125; else &amp;#123;    rjct()  ////如果rjct()函数带参数, 会传递给下一个the">
-<meta property="og:type" content="article">
-<meta property="og:title" content="promise">
-<meta property="og:url" content="http://gavin-gong.github.io/2016/10/13/promise/index.html">
+    <meta property="og:type" content="website">
+<meta property="og:title" content="Feway">
+<meta property="og:url" content="http://gavin-gong.github.io/tags/node/index.html">
 <meta property="og:site_name" content="Feway">
-<meta property="og:description" content="1234567891011121314151617let promise = new Promise((rsv, rjct) =&amp;gt; &amp;#123;  if (/*condition*/) &amp;#123;    rsv() //如果rsv()函数带参数, 会传递给下一个then  &amp;#125; else &amp;#123;    rjct()  ////如果rjct()函数带参数, 会传递给下一个the">
-<meta property="og:updated_time" content="2016-10-14T01:14:41.942Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="promise">
-<meta name="twitter:description" content="1234567891011121314151617let promise = new Promise((rsv, rjct) =&amp;gt; &amp;#123;  if (/*condition*/) &amp;#123;    rsv() //如果rsv()函数带参数, 会传递给下一个then  &amp;#125; else &amp;#123;    rjct()  ////如果rjct()函数带参数, 会传递给下一个the">
+<meta name="twitter:title" content="Feway">
     
 
     
@@ -181,171 +177,50 @@
 </aside>
 
             
-            <section id="main"><article id="post-promise" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
+            <section id="main">
+<div class="timeline timeline-wrap">
+    <div class="timeline-row timeline-row-major">
+        <span class="node"><i class="fa fa-tag"></i></span>
+        <h1 class="title">#node</h1>
+    </div>
+    
+        <div class="timeline-row">
+            <span class="node"></span>
+            <div class="content">
                 
     
-        <h1 class="article-title" itemprop="name">
-            promise
+        <h1 itemprop="name">
+            <a class="timeline-article-title" href="/2016/10/18/yarn/">yarn学习</a>
         </h1>
     
 
-                
-                    <div class="article-meta">
-                        
+                <div class="article-meta">
+                    
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/2016/10/13/promise/">
-            <time datetime="2016-10-13T12:38:36.006Z" itemprop="datePublished">2016-10-13</time>
+        <a href="/2016/10/18/yarn/">
+            <time datetime="2016-10-18T08:59:15.864Z" itemprop="datePublished">2016-10-18</time>
         </a>
     </div>
 
 
-                        
+                    
     <div class="article-category">
     	<i class="fa fa-folder"></i>
         <a class="article-category-link" href="/categories/FE/">FE</a>
     </div>
 
-                        
+                    
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/es6/">es6</a>
+        <a class="tag-link" href="/tags/node/">node</a>
     </div>
 
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">rsv, rjct</span>) =&gt;</span> &#123;</div><div class="line">  <span class="keyword">if</span> (<span class="comment">/*condition*/</span>) &#123;</div><div class="line">    rsv() <span class="comment">//如果rsv()函数带参数, 会传递给下一个then</span></div><div class="line">  &#125; <span class="keyword">else</span> &#123;</div><div class="line">    rjct()  <span class="comment">////如果rjct()函数带参数, 会传递给下一个then, 或者catch函数</span></div><div class="line">  &#125;</div><div class="line">&#125;)</div><div class="line"></div><div class="line">promise.then(<span class="function"><span class="params">data</span> =&gt;</span> <span class="built_in">console</span>.log(data), err =&gt; <span class="built_in">console</span>.log(err))</div><div class="line"><span class="comment">// 或者</span></div><div class="line">promise.then(<span class="function"><span class="params">data</span> =&gt;</span> <span class="built_in">console</span>.log(data)).catch(<span class="function"><span class="params">err</span> =&gt;</span> <span class="built_in">console</span>.log(err))</div><div class="line"><span class="comment">// data 为rsv()函数带的参数, 为空则data为undefined</span></div><div class="line"><span class="comment">// err 为reject()函数带的参数,</span></div><div class="line"></div><div class="line"><span class="comment">//  链式调用</span></div><div class="line">promise.then(<span class="function"><span class="params">data</span> =&gt;</span> data).then(<span class="function"><span class="params">data</span> =&gt;</span> data)</div><div class="line"><span class="comment">// promise值得传递, resolve()函数通过自己的参数传递给第一个then的第一个函数参数, (第二个函数参数接受的是reject()传递的参数), 如果then往后面的then传递数据, 将要传的数据return下去, 上面是箭头函数的写法, 可以省略rturn</span></div></pre></td></tr></table></figure>
-<h2 id="API"><a href="#API" class="headerlink" title="API"></a>API</h2><h3 id="promise-prototype-then"><a href="#promise-prototype-then" class="headerlink" title="promise.prototype.then()"></a>promise.prototype.then()</h3><h3 id="promise-prototype-resolve"><a href="#promise-prototype-resolve" class="headerlink" title="promise.prototype.resolve()"></a>promise.prototype.resolve()</h3><h3 id="promise-prototype-reject"><a href="#promise-prototype-reject" class="headerlink" title="promise.prototype.reject()"></a>promise.prototype.reject()</h3><h3 id="promise-prototype-all"><a href="#promise-prototype-all" class="headerlink" title="promise.prototype.all()"></a>promise.prototype.all()</h3><h3 id="promise-prototype-race"><a href="#promise-prototype-race" class="headerlink" title="promise.prototype.race()"></a>promise.prototype.race()</h3><h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="http://es6.ruanyifeng.com/#docs/promise" target="_blank" rel="external">es6入门</a></p>
-
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="http://gavin-gong.github.io/2016/10/13/promise/" data-id="ciufcg4s700065w50iwy4j6ad" class="article-share-link"><i class="fa fa-share"></i>Share</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-        <a href="http://gavin-gong.github.io/2016/10/13/promise/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://gavin-gong.github.io/2016/10/13/promise/">Comments</a>
-    
-
-        </footer>
-    </div>
-    
-        
-<nav id="article-nav">
-    
-        <a href="/2016/10/14/迷之抓虫/" id="article-nav-newer" class="article-nav-link-wrap">
-            <strong class="article-nav-caption">Newer</strong>
-            <div class="article-nav-title">
-                
-                    迷之抓虫
-                
+                </div>
             </div>
-        </a>
+        </div>
     
-    
-        <a href="/2016/10/11/fetch-api/" id="article-nav-older" class="article-nav-link-wrap">
-            <strong class="article-nav-caption">Older</strong>
-            <div class="article-nav-title">fetch</div>
-        </a>
-    
-</nav>
-
-
-    
-</article>
-
-
-    
-    <section id="comments">
-    
-        
-    <div id="disqus_thread">
-        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-    </div>
-
-    
-    </section>
-
+</div>
 </section>
             
                 <aside id="sidebar">
@@ -450,13 +325,11 @@
     <script>
     var disqus_config = function () {
         
-            this.page.url = 'http://gavin-gong.github.io/2016/10/13/promise/';
-        
-        this.page.identifier = 'promise';
+        this.page.identifier = 'undefined';
     };
     (function() { 
         var d = document, s = d.createElement('script');  
-        s.src = '//' + 'feway' + '.disqus.com/embed.js';
+        s.src = '//' + 'feway' + '.disqus.com/count.js';
         s.setAttribute('data-timestamp', +new Date());
         (d.head || d.body).appendChild(s);
     })();
