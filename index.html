@@ -149,7 +149,7 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                5
+                6
                 <span>posts</span>
             </div>
             <div class="article-info-block">
@@ -178,6 +178,164 @@
 
             
             <section id="main">
+    <article id="post-gulp-learn" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2016/10/18/gulp-learn/">gulp学习</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2016/10/18/gulp-learn/">
+            <time datetime="2016-10-18T10:36:19.992Z" itemprop="datePublished">2016-10-18</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/FE/">FE</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/node/">node</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>前两个月在公司实习, 在切图的流程中, css预处理器我用的是<code>sass</code>,每次都要开两个窗口, 一个编译’sass’,  然后又用另一个窗口运行’browser-sync’插件来监听文件的变化来刷新浏览器, 现在离职, 有时间来学习下<code>gulp</code>, 写个自己的工作流来提升开发效率.<br>预期实现功能:</p>
+<ul>
+<li>编译<code>sass</code></li>
+<li><code>css</code>自动添加前缀 -&gt; <code>autoprefixer</code></li>
+<li>编译<code>es6</code> -&gt; <code>babel</code></li>
+<li>自动刷新浏览器 -&gt; <code>browser-sync</code></li>
+</ul>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p><code>yarn global add gulp-cli</code><br><code>yarn add gulp --dev</code></p>
+<h3 id="API一览"><a href="#API一览" class="headerlink" title="API一览"></a><code>API</code>一览</h3><p>总共四个api: <code>gulp.src()</code>, <code>gulp.task()</code>, <code>gulp.dest</code>, <code>gulp.watch</code>.</p>
+<h4 id="gulp-src-globs-options"><a href="#gulp-src-globs-options" class="headerlink" title="gulp.src(globs[, options])"></a><code>gulp.src(globs[, options])</code></h4><p><code>globs</code>可以是文件名数组和字符串,<br><code>options</code>对象有四个参数可以配置: <code>buffer</code>, <code>read</code>, <code>base</code>,<br>该<code>api</code>后面可以连接管道操作,<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">gulp.src([<span class="string">'a.js'</span>, <span class="string">'b.js'</span>, <span class="string">'c.js'</span>], &#123;<span class="attr">buffer</span>: <span class="literal">false</span>&#125;)</div><div class="line">  .pipe(minify())</div><div class="line">  .pipe(gulp.dest(<span class="string">'build'</span>));</div></pre></td></tr></table></figure></p>
+<h4 id="glup-dest-path-options"><a href="#glup-dest-path-options" class="headerlink" title="glup.dest(path[, options])"></a><code>glup.dest(path[, options])</code></h4><p>写入文件, 可以进行管道操作,<br><code>path</code>写入文件路径<br><code>options</code>有两个选项 <code>cwd</code>输出文件夹, 默认<code>process.cwd()</code>, <code>mode</code>关于读写权限的.</p>
+<h4 id="gulp-task-name-deps-fn"><a href="#gulp-task-name-deps-fn" class="headerlink" title="gulp.task(name[, deps][, fn])"></a><code>gulp.task(name[, deps][, fn])</code></h4><p>一般配置一个任务,<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">gulp.task(<span class="string">'sass'</span>, [<span class="string">'task'</span>, <span class="string">'name'</span>, <span class="string">'of'</span>, <span class="string">'array'</span>],  () =&gt; &#123;</div><div class="line">  <span class="comment">// do stuff</span></div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p><code>name</code>自定义用户名<br><code>deps</code>,任务数组,  这些任务将会在你定义的任务之前运行,<br><code>fn</code>, 定义该任务的主要操作<br>忽略函数<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">gulp.task(<span class="string">'sass'</span>, [<span class="string">'task'</span>, <span class="string">'name'</span>, <span class="string">'of'</span>, <span class="string">'array'</span>]);</div><div class="line"><span class="comment">// 这些任务将会并发执行</span></div></pre></td></tr></table></figure></p>
+<h4 id="gulp-watch-glob-opts-tasks-or-gulp-watch-glob-opts-cb"><a href="#gulp-watch-glob-opts-tasks-or-gulp-watch-glob-opts-cb" class="headerlink" title="gulp.watch(glob[, opts], tasks) or gulp.watch(glob [, opts, cb])"></a><code>gulp.watch(glob[, opts], tasks)</code> or <code>gulp.watch(glob [, opts, cb])</code></h4><p><code>globs</code> 上同<br><code>tasks</code> 任务列表<br>了解了个大概!</p>
+<h3 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h3><p>在项目根目录下新建一个<code>gulpfile.js</code>文件, 然后开写!</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> gulp = <span class="built_in">require</span>(<span class="string">'gulp'</span>);</div><div class="line"></div><div class="line">gulp.task(<span class="string">'default'</span>, () =&gt; &#123;</div><div class="line"></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h3 id="添加插件"><a href="#添加插件" class="headerlink" title="添加插件"></a>添加插件</h3><p>我们还需要安装一些需要的插件<br>插件列表</p>
+<ul>
+<li><code>gulp-sass</code></li>
+<li><code>gulp-autoprefixer</code></li>
+<li><code>gulp-babel</code></li>
+<li><code>browser-sync</code><br><code>yarn add &lt;pkg-name&gt; --dev</code></li>
+</ul>
+<p>在配置<code>babel</code>编译时, 出现了点小错误<br><code>Error: Couldn&#39;t find preset &quot;es2015&quot; relative to directory &quot;/Users/username&quot;</code><br>最终在stackoverflow上找到<a href="http://stackoverflow.com/questions/34819473/error-couldnt-find-preset-es2015-relative-to-directory-users-username" target="_blank" rel="external">解决方案</a><br><code>yarn add babel-preset-es2015 --dev</code><br>然后在配置文件中引入<br><code>var es2015 = require(&#39;babel-preset-es2015&#39;)</code>;<br><code>gulp.task(&#39;es2015&#39;, () =&gt; gulp.src(&#39;./src/js/**/*&#39;).pipe(babel({ presets: [es2015] })).pipe(gulp.dest(&#39;./dist/js&#39;)));</code></p>
+<h3 id="整体思路"><a href="#整体思路" class="headerlink" title="整体思路"></a>整体思路</h3><p>将编辑的文件放在<code>src</code>目录, 将最终生成的文件放在<code>dist</code>目录, 开启一个本地服务器, 将文件处理后(或者直接)拷贝到<code>dist</code>,完成初始化, 然后监听src目录下的各种文件, 一旦有变化, 就进行相应的编译或者复制工作, 将结果输出到<code>dist</code>目录, 一旦<code>dist</code>目录下的文件被改变会触发浏览器刷新.</p>
+<h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><p>最终代码在此<br><a href="https://gist.github.com/Gavin-Gong/ea7c342474db90108fe9ffb8e0a33cba" target="_blank" rel="external">gulpfile.js</a></p>
+<h3 id="后话"><a href="#后话" class="headerlink" title="后话"></a>后话</h3><p>很渣的一个<code>gulp</code>配置文件, 从性能上考虑, 没有必要的在<code>dist</code>和<code>src</code>目录都监听. 更好的思路应该是: 初始化完成后, 一旦在<code>src</code>目录监听到变化, 等处理工作完成, 刷新浏览器.</p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://gavin-gong.github.io/2016/10/18/gulp-learn/" data-id="ciul28ooz00076w50sqzhntgk" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="http://gavin-gong.github.io/2016/10/18/gulp-learn/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://gavin-gong.github.io/2016/10/18/gulp-learn/">Comments</a>
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
     <article id="post-yarn" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -232,7 +390,7 @@
 <li><code>yarn run &lt;script&gt;</code> 执行</li>
 <li><code>yarn ls</code> 列出所有依赖</li>
 </ul>
-<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://github.com/yarnpkg/yarn/issues/1179" target="_blank" rel="external">yarn 错误</a></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://yarnpkg.com/en/docs/cli/" target="_blank" rel="external">yarn官网</a><br><a href="https://github.com/yarnpkg/yarn/issues/1179" target="_blank" rel="external">yarn 错误</a><br><a href="https://zhuanlan.zhihu.com/p/22967139" target="_blank" rel="external">新的 js 包管理工具 yarn 解决了什么问题</a></p>
 
         
         </div>
@@ -243,7 +401,7 @@
 
 </div>
 
-    <a data-url="http://gavin-gong.github.io/2016/10/18/yarn/" data-id="ciufcg4sb00085w507z75sv4d" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://gavin-gong.github.io/2016/10/18/yarn/" data-id="ciul28opv00096w504onu7q2d" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -389,7 +547,7 @@
 
 </div>
 
-    <a data-url="http://gavin-gong.github.io/2016/10/14/迷之抓虫/" data-id="ciufcg4sh00095w506efc8j0q" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://gavin-gong.github.io/2016/10/14/迷之抓虫/" data-id="ciul28opv000d6w50qqmcuk6o" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -522,7 +680,7 @@
 
 </div>
 
-    <a data-url="http://gavin-gong.github.io/2016/10/13/promise/" data-id="ciufcg4s700065w50iwy4j6ad" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://gavin-gong.github.io/2016/10/13/promise/" data-id="ciul28opf00086w50981dmfz8" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -654,7 +812,7 @@
 
 </div>
 
-    <a data-url="http://gavin-gong.github.io/2016/10/11/fetch-api/" data-id="ciufcg4rq00025w50yz5fm3ca" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://gavin-gong.github.io/2016/10/11/fetch-api/" data-id="ciul28on900016w500iofvu2j" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -797,7 +955,7 @@
 
 </div>
 
-    <a data-url="http://gavin-gong.github.io/2016/10/10/async-wait/" data-id="ciufcg4rg00005w504gsqkoeb" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://gavin-gong.github.io/2016/10/10/async-wait/" data-id="ciul28oo400036w50z3sho8ks" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -888,6 +1046,15 @@
                         
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/FE/">FE</a></p>
+                            <p class="item-title"><a href="/2016/10/18/gulp-learn/" class="title">gulp学习</a></p>
+                            <p class="item-date"><time datetime="2016-10-18T10:36:19.992Z" itemprop="datePublished">2016-10-18</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/FE/">FE</a></p>
                             <p class="item-title"><a href="/2016/10/18/yarn/" class="title">yarn学习</a></p>
                             <p class="item-date"><time datetime="2016-10-18T08:59:15.864Z" itemprop="datePublished">2016-10-18</time></p>
                         </div>
@@ -920,15 +1087,6 @@
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/FE/">FE</a></p>
-                            <p class="item-title"><a href="/2016/10/10/async-wait/" class="title">async/await</a></p>
-                            <p class="item-date"><time datetime="2016-10-10T12:06:50.548Z" itemprop="datePublished">2016-10-10</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -938,7 +1096,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">categories</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/FE/">FE</a><span class="category-list-count">5</span></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/FE/">FE</a><span class="category-list-count">6</span></li></ul>
         </div>
     </div>
 
@@ -947,7 +1105,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">archives</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">5</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">6</span></li></ul>
         </div>
     </div>
 
@@ -956,7 +1114,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">tags</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/">Vue</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/">node</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/">Vue</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/">node</a><span class="tag-list-count">2</span></li></ul>
         </div>
     </div>
 
