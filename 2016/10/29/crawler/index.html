@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <meta charset="utf-8">
+    
+    <title>写个爬虫, 爬取学校招聘信息 | Feway</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="自从前几天的某一天晚上梦到尤教主之后, 不知道是不是因为尤教主在梦里对我太冷淡了, 我这几天都没有写Vue的冲动 ==; 然后我就闲来无事边学 Node 边写爬虫来抓取学校的招聘信息.
+使用的模块:
+cheerio
+superagent
+superagent-charset
+json2xls
+json2csv 期间遇到数据写不进去, 写进去乱码的问题, 最后放弃这个模块, 用了上面那个
+
+思路:获">
+<meta property="og:type" content="article">
+<meta property="og:title" content="写个爬虫, 爬取学校招聘信息">
+<meta property="og:url" content="http://gavin-gong.github.io/2016/10/29/crawler/index.html">
+<meta property="og:site_name" content="Feway">
+<meta property="og:description" content="自从前几天的某一天晚上梦到尤教主之后, 不知道是不是因为尤教主在梦里对我太冷淡了, 我这几天都没有写Vue的冲动 ==; 然后我就闲来无事边学 Node 边写爬虫来抓取学校的招聘信息.
+使用的模块:
+cheerio
+superagent
+superagent-charset
+json2xls
+json2csv 期间遇到数据写不进去, 写进去乱码的问题, 最后放弃这个模块, 用了上面那个
+
+思路:获">
+<meta property="og:updated_time" content="2016-10-29T09:52:36.202Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="写个爬虫, 爬取学校招聘信息">
+<meta name="twitter:description" content="自从前几天的某一天晚上梦到尤教主之后, 不知道是不是因为尤教主在梦里对我太冷淡了, 我这几天都没有写Vue的冲动 ==; 然后我就闲来无事边学 Node 边写爬虫来抓取学校的招聘信息.
+使用的模块:
+cheerio
+superagent
+superagent-charset
+json2xls
+json2csv 期间遇到数据写不进去, 写进去乱码的问题, 最后放弃这个模块, 用了上面那个
+
+思路:获">
+    
+
+    
+
+    
+
+    <link rel="stylesheet" href="/vendor/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/vendor/open-sans/styles.css">
+    <link rel="stylesheet" href="/vendor/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/vendor/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/vendor/lightgallery/css/lightgallery.min.css">
+    
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">Feway</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/css/images/avatar.png" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/css/images/avatar.png" />
+            <h2 id="name">Gavin-Gong</h2>
+            <h3 id="title">Web Developer</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Hunan, China</span>
+            <a id="follow" target="_blank" href="https://github.com/gavin-gong/">FOLLOW</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                9
+                <span>posts</span>
+            </div>
+            <div class="article-info-block">
+                5
+                <span>tags</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="http://github.com/gavin-gong" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-crawler" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            写个爬虫, 爬取学校招聘信息
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2016/10/29/crawler/">
+            <time datetime="2016-10-29T09:06:58.172Z" itemprop="datePublished">2016-10-29</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/FE/">FE</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Node/">Node</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>自从前几天的某一天晚上梦到尤教主之后, 不知道是不是因为尤教主在梦里对我太冷淡了, 我这几天都没有写<code>Vue</code>的冲动 ==; 然后我就闲来无事边学 <code>Node</code> 边写爬虫来抓取学校的招聘信息.</p>
+<h3 id="使用的模块"><a href="#使用的模块" class="headerlink" title="使用的模块:"></a>使用的模块:</h3><ul>
+<li>cheerio</li>
+<li>superagent</li>
+<li>superagent-charset</li>
+<li>json2xls</li>
+<li>json2csv 期间遇到数据写不进去, 写进去乱码的问题, 最后放弃这个模块, 用了上面那个</li>
+</ul>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路:"></a>思路:</h3><p>获取招聘列表页数 -&gt; 获取所有列表 -&gt; 获取id -&gt; 获取所有招聘公司详情 -&gt; 提取检索数据 -&gt; 生成excel文件</p>
+<h3 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题:"></a>遇到的问题:</h3><ul>
+<li>中文乱码 -&gt; 见下</li>
+<li>请求的先后顺序 -&gt; promise</li>
+<li>模块使用问题 -&gt; 更换模块 ==;</li>
+</ul>
+<h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><p> 乱码:<br> 一般的网页是<code>utf-8</code>编码, 学校的网址用的是<code>gbk</code>, 所以要安装<code>superagent-charset</code>模块指定编码 ==!<br> <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 引入</span></div><div class="line"><span class="keyword">let</span> charset = <span class="built_in">require</span>(<span class="string">'charset'</span>);</div><div class="line"><span class="keyword">let</span> superagent = charset(<span class="built_in">require</span>(<span class="string">'superagent'</span>))</div><div class="line">superagent.get(url).charset(<span class="string">'gbk'</span>).then(...) <span class="comment">// 指定编码</span></div><div class="line"><span class="keyword">let</span> $ = cheerio(html, &#123;<span class="attr">decodeEntities</span>: <span class="literal">false</span>&#125;) <span class="comment">// 禁止 cheerio对数据进行处理</span></div></pre></td></tr></table></figure></p>
+<h3 id="渣渣代码"><a href="#渣渣代码" class="headerlink" title="渣渣代码"></a>渣渣代码</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span>	charset = <span class="built_in">require</span>(<span class="string">'superagent-charset'</span>),</div><div class="line">		superagent = charset(<span class="built_in">require</span>(<span class="string">'superagent'</span>)),</div><div class="line">		cheerio = <span class="built_in">require</span>(<span class="string">'cheerio'</span>);</div><div class="line"></div><div class="line"><span class="keyword">let</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</div><div class="line"><span class="keyword">let</span> json2xls = <span class="built_in">require</span>(<span class="string">'json2xls'</span>);</div><div class="line"></div><div class="line"><span class="keyword">let</span> listBaseUrl = <span class="string">'http://stu.hnust.edu.cn/jy/jiuyeIndex.do?method=toCategoryZPH&amp;byzd=TYPE16&amp;pageNo='</span>; <span class="comment">// 加page数</span></div><div class="line"><span class="keyword">let</span> detailBaseUrl = <span class="string">'http://stu.hnust.edu.cn/jy/jiuyeIndex.do?method=showZphInfo2&amp;id='</span>; <span class="comment">// 加id -&gt; 访问详情页</span></div><div class="line"></div><div class="line">superagent</div><div class="line">	.get(<span class="string">`<span class="subst">$&#123;listBaseUrl&#125;</span>1`</span>)</div><div class="line">	.charset(<span class="string">'gbk'</span>)</div><div class="line">	.then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</div><div class="line">		<span class="comment">// 获取总页数</span></div><div class="line">		<span class="keyword">let</span> $ = cheerio.load(res.text, &#123;<span class="attr">decodeEntities</span>: <span class="literal">false</span>&#125;);</div><div class="line">		<span class="keyword">let</span> pageNum = $(<span class="string">'.blue-14 a'</span>).eq(<span class="number">1</span>).attr(<span class="string">'href'</span>).match(<span class="regexp">/\'[0-9]+\'/g</span>)[<span class="number">0</span>].replace(<span class="regexp">/\'/g</span>, <span class="string">''</span>);</div><div class="line">		<span class="keyword">return</span> pageNum;</div><div class="line">	&#125;)</div><div class="line">	.then(<span class="function"><span class="params">pageNum</span> =&gt;</span> &#123;</div><div class="line">		<span class="comment">// 获取访问所有的列表页由于获取id列表</span></div><div class="line">		<span class="keyword">let</span> promiseList = [];</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="built_in">parseInt</span>(pageNum); i ++) &#123;</div><div class="line">			<span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;listBaseUrl + i&#125;</span>`</span>);</div><div class="line">			promiseList[i] = superagent.get(<span class="string">`<span class="subst">$&#123;listBaseUrl&#125;</span><span class="subst">$&#123;i+<span class="number">1</span>&#125;</span>`</span>).charset(<span class="string">'gbk'</span>);</div><div class="line">		&#125;</div><div class="line">		<span class="comment">// console.log(promiseList);</span></div><div class="line">		<span class="keyword">return</span> <span class="built_in">Promise</span>.all(promiseList);</div><div class="line">	&#125;)</div><div class="line">	.then(<span class="function"><span class="params">resList</span> =&gt;</span> &#123;</div><div class="line">		<span class="comment">// 根据resList 返回id列表</span></div><div class="line">		<span class="keyword">let</span> idList = [];</div><div class="line">		resList.forEach(<span class="function"><span class="params">item</span> =&gt;</span> &#123;</div><div class="line">			<span class="keyword">var</span> $ = cheerio.load(item.text, &#123;<span class="attr">decodeEntities</span>: <span class="literal">false</span>&#125;);</div><div class="line">			<span class="built_in">console</span>.log(<span class="string">'pageNum'</span>, $(<span class="string">'.xwmb-1 ~ div ul #li1 a'</span>).length);</div><div class="line">			$(<span class="string">'.xwmb-1 ~ div ul #li1 a'</span>).each(<span class="function"><span class="keyword">function</span> (<span class="params">index</span>) </span>&#123;</div><div class="line">				<span class="keyword">let</span> id = $(<span class="keyword">this</span>).attr(<span class="string">'href'</span>).match(<span class="regexp">/\'[0-9a-zA-Z]+\'/g</span>)[<span class="number">0</span>].replace(<span class="regexp">/\'/g</span>, <span class="string">''</span>)</div><div class="line">				idList.push(id);</div><div class="line">			&#125;);</div><div class="line">		&#125;)</div><div class="line">		<span class="keyword">return</span> idList</div><div class="line">	&#125;)</div><div class="line">	.then(<span class="function"><span class="params">idList</span> =&gt;</span> &#123;</div><div class="line">		<span class="comment">// 根据idList 返回所有详情页的原始数据</span></div><div class="line">		<span class="keyword">let</span> promiseList = []</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; idList.length; i++) &#123;</div><div class="line">			promiseList[i] = superagent.get(<span class="string">`<span class="subst">$&#123;detailBaseUrl + idList[i]&#125;</span>`</span>).charset(<span class="string">'gbk'</span>);</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> <span class="built_in">Promise</span>.all(promiseList);</div><div class="line">	&#125;).then(<span class="function"><span class="params">incDetailList</span> =&gt;</span> &#123;</div><div class="line">		<span class="comment">// 提取数据</span></div><div class="line">		<span class="keyword">let</span> dataList = [];</div><div class="line">		incDetailList.forEach(<span class="function"><span class="params">data</span> =&gt;</span> &#123;</div><div class="line"></div><div class="line">					<span class="keyword">let</span> $ = cheerio.load(data.text, &#123;<span class="attr">decodeEntities</span>: <span class="literal">false</span>&#125;);</div><div class="line">					<span class="comment">// 获取时间</span></div><div class="line">					<span class="keyword">let</span> date = $(<span class="string">'.xian2'</span>).last().text().replace(<span class="string">'招聘时间：'</span>, <span class="string">''</span>);</div><div class="line">					<span class="comment">// 地点</span></div><div class="line">					<span class="comment">// console.log(date);</span></div><div class="line">					<span class="keyword">let</span> address = $(<span class="string">'.xian2'</span>).first().text().replace(<span class="string">'招聘地点：'</span>, <span class="string">''</span>);</div><div class="line">					<span class="comment">// 公司名字</span></div><div class="line">					<span class="keyword">let</span> incName = $(<span class="string">'.zlan2'</span>).text().replace(<span class="regexp">/\（[0-9\u4e00-\u9fa5]+\）/</span>, <span class="string">''</span>);</div><div class="line">					<span class="comment">// 获取文本</span></div><div class="line">					<span class="keyword">let</span> text = $(<span class="string">'.xwmb-1 + div table'</span>).eq(<span class="number">4</span>).text().replace(<span class="regexp">/[\s]/g</span>, <span class="string">''</span>);</div><div class="line">					dataList.push(&#123;</div><div class="line">						<span class="attr">date</span>: date,</div><div class="line">						<span class="attr">address</span>: address,</div><div class="line">						<span class="attr">incName</span>: incName,</div><div class="line">						<span class="attr">link</span>: data.request.url,</div><div class="line">						<span class="attr">text</span>: text</div><div class="line">					&#125;);</div><div class="line">		&#125;);</div><div class="line">		<span class="keyword">return</span> dataList;</div><div class="line">	&#125;)</div><div class="line">	.then(<span class="function"><span class="params">data</span> =&gt;</span> &#123;</div><div class="line">		<span class="comment">// 筛选数据， 输出csv文件</span></div><div class="line">		<span class="keyword">let</span> reg = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="regexp">/web前端|ui设计|[^a-zA-Z\/]web[^a-zA-Z\/]|前端[\u4e00-\u9fa5\s]+|[^a-zA-Z]ui[\u4e00-\u9fa5\s]+/</span>, <span class="string">'gi'</span>);</div><div class="line">		<span class="keyword">let</span> result = data.filter(<span class="function"><span class="params">item</span> =&gt;</span> &#123;</div><div class="line">			<span class="keyword">let</span> matchedResult = item.text.match(reg);</div><div class="line">			<span class="keyword">delete</span> item.text;</div><div class="line">			<span class="keyword">if</span> (matchedResult) &#123;</div><div class="line">				item.star = matchedResult.length;</div><div class="line">				<span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">			&#125; <span class="keyword">else</span> &#123;</div><div class="line">				<span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">			&#125;</div><div class="line">		&#125;);</div><div class="line">		<span class="keyword">let</span> xls = json2xls(result);</div><div class="line">		fs.writeFileSync(<span class="string">'data.xlsx'</span>, xls, <span class="string">'binary'</span>);</div><div class="line">	&#125;)</div><div class="line"></div><div class="line"><span class="comment">// 思路</span></div><div class="line"><span class="comment">// 获取总页数 -&gt;　获取所有公司id列表-&gt; 获取单个公司名字 &amp; 日期*n　 -&gt; 检索关键字 -&gt; 生成列表</span></div></pre></td></tr></table></figure>
+<h3 id="后话"><a href="#后话" class="headerlink" title="后话"></a>后话</h3><p>因为用了<code>promise</code>没有陷入<code>callback hell</code>, 整个流程是用<code>then</code>串起来的, 但是你如果不写注释, 你会发现你压根就不知道<code>then</code>里面做了什么事, 最好的方案当然是<code>async/await</code>, 刚好<code>Node 7</code>发布, 宣布支持<code>async/await</code>, 兴冲冲地升级, 想用<code>async/await</code>写来着, 悲催地发现我另外一个<code>vue</code>的项目的<code>node-sass</code>不支持, 又不想搞<code>babel</code>编译, 所以不得已放弃治疗.</p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://gavin-gong.github.io/2016/10/29/crawler/" data-id="ciuv0yqcd000wcg50bqr65uo5" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="http://gavin-gong.github.io/2016/10/29/crawler/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://gavin-gong.github.io/2016/10/29/crawler/">Comments</a>
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2016/10/24/about-interview/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Older</strong>
+            <div class="article-nav-title">一次奇葩的面试和反思</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+</section>
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">recent</h3>
+        <div class="widget">
+            <ul id="recent-post" class="no-thumbnail">
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/FE/">FE</a></p>
+                            <p class="item-title"><a href="/2016/10/29/crawler/" class="title">写个爬虫, 爬取学校招聘信息</a></p>
+                            <p class="item-date"><time datetime="2016-10-29T09:06:58.172Z" itemprop="datePublished">2016-10-29</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/随感/">随感</a></p>
+                            <p class="item-title"><a href="/2016/10/24/about-interview/" class="title">一次奇葩的面试和反思</a></p>
+                            <p class="item-date"><time datetime="2016-10-24T13:25:54.389Z" itemprop="datePublished">2016-10-24</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/随感/">随感</a></p>
+                            <p class="item-title"><a href="/2016/10/22/find-job/" class="title">求职心态的变化以及计划</a></p>
+                            <p class="item-date"><time datetime="2016-10-22T10:59:41.660Z" itemprop="datePublished">2016-10-22</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/FE/">FE</a></p>
+                            <p class="item-title"><a href="/2016/10/18/gulp-learn/" class="title">gulp学习</a></p>
+                            <p class="item-date"><time datetime="2016-10-18T10:36:19.992Z" itemprop="datePublished">2016-10-18</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/FE/">FE</a></p>
+                            <p class="item-title"><a href="/2016/10/18/yarn/" class="title">yarn学习</a></p>
+                            <p class="item-date"><time datetime="2016-10-18T08:59:15.864Z" itemprop="datePublished">2016-10-18</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/FE/">FE</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/随感/">随感</a><span class="category-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">9</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">tags</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node/">Node</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/">Vue</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/">node</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工作/">工作</a><span class="tag-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2016 Gavin-Gong<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_config = function () {
+        
+            this.page.url = 'http://gavin-gong.github.io/2016/10/29/crawler/';
+        
+        this.page.identifier = 'crawler';
+    };
+    (function() { 
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'feway' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+
+
+    
+        <script src="/vendor/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/vendor/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/vendor/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/vendor/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/vendor/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/vendor/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/vendor/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/vendor/lightgallery/js/lg-share.min.js"></script>
+        <script src="/vendor/lightgallery/js/lg-video.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>
