@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <meta charset="utf-8">
+    
+    <title>vue-router 笔记 | Feway</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="今天状态不佳, 只好看下vue-router的文档, 做下笔记, 平时很多自己遇到的问题其实都可以在文档里面找到答案的.
+安装并使用 对于模块化开发 1234import Vue from &apos;vue&apos;;import VueRouter from &apos;vue-router&apos;;Vue.use(VueRouter);
+ 平常开发 直接引用就好, 不过要注意标签先后顺序.
+tips  在使用路由匹配时,类">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue-router 笔记">
+<meta property="og:url" content="http://gavin-gong.github.io/2016/10/30/vue-router-note/index.html">
+<meta property="og:site_name" content="Feway">
+<meta property="og:description" content="今天状态不佳, 只好看下vue-router的文档, 做下笔记, 平时很多自己遇到的问题其实都可以在文档里面找到答案的.
+安装并使用 对于模块化开发 1234import Vue from &apos;vue&apos;;import VueRouter from &apos;vue-router&apos;;Vue.use(VueRouter);
+ 平常开发 直接引用就好, 不过要注意标签先后顺序.
+tips  在使用路由匹配时,类">
+<meta property="og:updated_time" content="2016-11-01T02:09:30.787Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="vue-router 笔记">
+<meta name="twitter:description" content="今天状态不佳, 只好看下vue-router的文档, 做下笔记, 平时很多自己遇到的问题其实都可以在文档里面找到答案的.
+安装并使用 对于模块化开发 1234import Vue from &apos;vue&apos;;import VueRouter from &apos;vue-router&apos;;Vue.use(VueRouter);
+ 平常开发 直接引用就好, 不过要注意标签先后顺序.
+tips  在使用路由匹配时,类">
+    
+
+    
+
+    
+
+    <link rel="stylesheet" href="/vendor/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/vendor/open-sans/styles.css">
+    <link rel="stylesheet" href="/vendor/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/vendor/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/vendor/lightgallery/css/lightgallery.min.css">
+    
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">Feway</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/css/images/avatar.png" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/css/images/avatar.png" />
+            <h2 id="name">Gavin-Gong</h2>
+            <h3 id="title">Web Developer</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Hunan, China</span>
+            <a id="follow" target="_blank" href="https://github.com/gavin-gong/">FOLLOW</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                10
+                <span>posts</span>
+            </div>
+            <div class="article-info-block">
+                5
+                <span>tags</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="http://github.com/gavin-gong" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-vue-router-note" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            vue-router 笔记
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2016/10/30/vue-router-note/">
+            <time datetime="2016-10-30T02:35:13.848Z" itemprop="datePublished">2016-10-30</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/FE/">FE</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Vue/">Vue</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p> 今天状态不佳, 只好看下<code>vue-router</code>的文档, 做下笔记, 平时很多自己遇到的问题其实都可以在文档里面找到答案的.</p>
+<h2 id="安装并使用"><a href="#安装并使用" class="headerlink" title="安装并使用"></a>安装并使用</h2><p> 对于模块化开发<br> <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span>;</div><div class="line"><span class="keyword">import</span> VueRouter <span class="keyword">from</span> <span class="string">'vue-router'</span>;</div><div class="line"></div><div class="line">Vue.use(VueRouter);</div></pre></td></tr></table></figure></p>
+<p> 平常开发<br> 直接引用就好, 不过要注意标签先后顺序.</p>
+<h2 id="tips"><a href="#tips" class="headerlink" title="tips"></a>tips</h2><p>  在使用路由匹配时,类似<code>article/:id</code>, 原先的组件实例会被复用, 这意味着原先组件的生命周期钩子函数<code>created()</code>等等 不会被调用, 这时候可以考虑路由钩子函数和<code>watch</code> <code>$route</code>对象的变化</p>
+<p>  高级路由匹配 -&gt; path-to-regexp</p>
+<p>  路由匹配优先级 -&gt; 同一路径可以匹配多个路由, 优先级按照定义先后顺序来, 举个例子, 平时定义的404路由一般放最后面. 当前面的路径都无法匹配到才会匹配到它.<br>  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">path</span>: <span class="string">'*'</span>,</div><div class="line">  <span class="attr">name</span>: <span class="string">'404'</span>,</div><div class="line">  <span class="attr">component</span>: not-found,</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>  如果一个路由包括子路由, 那么可以考虑将它的路径设置为从根路径开始<code>/user/:id</code>, 子路由的路径就可以简短设置为<code>profile</code>, 无需嵌套很长的路径<br>  一个路由包括多个子路由, 如果想让他默认渲染某个子路由的话可以这样写<br>  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">children: [</div><div class="line">  &#123;<span class="attr">path</span>: <span class="string">''</span>, <span class="attr">component</span>: Profile&#125;,</div><div class="line">]</div></pre></td></tr></table></figure></p>
+<p>  不过按照我的想法在路由设置<code>redirect</code>属性指向某个子路由也是可以的, 根据之前的例子<br>  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">path</span>: <span class="string">'/user/:id'</span>,</div><div class="line">  <span class="attr">redirect</span>: <span class="string">'profile'</span>, <span class="comment">// 不知道这样行不行,</span></div><div class="line">  redirect: &#123;<span class="attr">name</span>: <span class="string">'profile'</span>&#125; <span class="comment">// 这样应该可以</span></div><div class="line">  redirect: <span class="string">'/user/:id/profile'</span> <span class="comment">//   这样?</span></div><div class="line">  children: [</div><div class="line">    &#123;<span class="attr">path</span>: <span class="string">'profile'</span>, <span class="attr">component</span>: Profile, <span class="attr">name</span>: <span class="string">'profile'</span> &#125;,</div><div class="line">  ]</div><div class="line">&#125;</div><div class="line"><span class="comment">// 实验了下, 好像都不行 ==! 什么鬼?</span></div></pre></td></tr></table></figure></p>
+<h2 id="编程式导航"><a href="#编程式导航" class="headerlink" title="编程式导航"></a>编程式导航</h2><p>  和<code>vue-router 1.0</code>不同的是, 以前的跳转是<code>this.$route.router.go(...)</code>现在是<code>this.$router.push(...)</code><br>  <code>router.replace(path)</code>等同于 <code>&lt;router-link :to=&quot;path&quot; replace&gt;</code> 不会留下历史记录</p>
+<h2 id="命名视图"><a href="#命名视图" class="headerlink" title="命名视图"></a>命名视图</h2><p>  使用场景: 一个页面同时有多个<code>router-view</code><br>  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;router-view name=<span class="string">"one"</span>&gt;&lt;/router-view&gt;</div><div class="line">&lt;router-view name="two"&gt;&lt;/router-view&gt;</div><div class="line"></div><div class="line">&#123;</div><div class="line">  path: '/',</div><div class="line">  components: [</div><div class="line">    default: Foo,</div><div class="line">    a: bar,</div><div class="line">    b: baz,</div><div class="line">  ],</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="重定向"><a href="#重定向" class="headerlink" title="重定向"></a>重定向</h2><p>  <code>redirect</code>可以是字符串, 对象, 甚至是函数<br>  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">redirect: <span class="function"><span class="params">to</span> =&gt;</span> &#123;</div><div class="line">  <span class="comment">// 接收目标路由作为参数</span></div><div class="line">  <span class="comment">// 返回重定向对象或字符串</span></div><div class="line">  <span class="keyword">return</span>  </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="history-mode"><a href="#history-mode" class="headerlink" title="history mode"></a>history mode</h2><p>  如果不想要很丑url模式可以设置, 然后url就会像正常url, 例如<code>www.youtube.com/user/id</code>. 但是需要后台配置, 学node+express再试试<br>  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">new</span> VueRouter(&#123;</div><div class="line">  <span class="attr">mode</span>: <span class="string">'history'</span>,</div><div class="line">  route,</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<h2 id="导航钩子函数"><a href="#导航钩子函数" class="headerlink" title="导航钩子函数"></a>导航钩子函数</h2><p>  <code>beforeEach()</code>和<code>afterEach()</code>这两个函数好像没什么变化, 另外<code>afterEach</code>是没有<code>next()</code>钩子的<br>  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">router.beforeEach(<span class="function">(<span class="params">to, <span class="keyword">from</span>, next</span>) =&gt;</span> &#123;</div><div class="line">    <span class="comment">// next() 执行下一个钩子函数</span></div><div class="line">    <span class="comment">// next(false) 中断当前导航</span></div><div class="line">    <span class="comment">// next(path) 跳转到另外的页面</span></div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<h3 id="某个路由独享钩子"><a href="#某个路由独享钩子" class="headerlink" title="某个路由独享钩子"></a>某个路由独享钩子</h3><p>  <code>to</code>, <code>from</code>实际上是一个<code>$route</code>对象.<br>  在路由配置上直接定义<br>  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">path</span>: <span class="string">'/'</span>,</div><div class="line">  <span class="attr">component</span>: Component,</div><div class="line">  <span class="attr">beforeEnter</span>: (to, <span class="keyword">from</span> ,next) &#123;</div><div class="line"></div><div class="line">  &#125;,</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>  或者在组件内定义钩子<br>  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">beforeRouteEnter (to, <span class="keyword">from</span>, next) =&gt; &#123;</div><div class="line">  <span class="comment">// 无法访问this, 因为组件实例还未被创建, 可以传一个回调给next来访问组件实例</span></div><div class="line">  next(<span class="function"><span class="params">vm</span> =&gt;</span> &#123;</div><div class="line">      <span class="comment">// 访问vm</span></div><div class="line">      vm.postMethod();</div><div class="line">  &#125;)</div><div class="line">&#125;</div><div class="line">afterRouteEnter (to, <span class="keyword">from</span>, next) =&gt; &#123;</div><div class="line">  <span class="comment">// 可以访问this</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="路由元信息"><a href="#路由元信息" class="headerlink" title="路由元信息"></a>路由元信息</h2><p>新玩意, 设置代码如下， 可以通过<code>$route.matched.requireAuth</code>访问, 钩子函数中的<code>to</code>, <code>from</code>实际上就是一个<code>$route</code>对象, <code>meta</code> 用来配置权限非常有用, 记得1.0 是没没有单独选项的<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">path</span>: <span class="string">'/'</span>,</div><div class="line">  <span class="attr">component</span>: Login,</div><div class="line">  <span class="attr">meta</span>: &#123;</div><div class="line">    <span class="attr">requireAuth</span>: <span class="literal">true</span>,</div><div class="line">  &#125;,</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="滚动行为"><a href="#滚动行为" class="headerlink" title="滚动行为"></a>滚动行为</h2><p>只能在HTML5 <code>history</code>模式下有用, <code>savedPosition</code>当且仅当 popstate 导航 (通过浏览器的 前进/后退 按钮触发) 时才可用<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> VueRouter(&#123;</div><div class="line">  <span class="attr">routes</span>: [],</div><div class="line">  scrollBehavior (to, <span class="keyword">from</span>, savedPosition) &#123;</div><div class="line">    <span class="keyword">return</span> &#123;<span class="attr">x</span>: <span class="number">0</span>, <span class="attr">y</span>:<span class="number">0</span>&#125;</div><div class="line">    <span class="comment">// 或者</span></div><div class="line">    <span class="keyword">return</span> &#123;<span class="attr">selector</span>: <span class="string">'#app'</span>&#125; <span class="comment">// 返回一个选择器</span></div><div class="line">    <span class="keyword">return</span> &#123;<span class="attr">selector</span>: to.hash&#125; <span class="comment">// 滚动到锚点</span></div><div class="line">    <span class="keyword">return</span> <span class="literal">false</span> <span class="comment">// 不滚动</span></div><div class="line">    <span class="keyword">return</span> &#123;&#125; <span class="comment">// 不滚动</span></div><div class="line">  &#125;,</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<h2 id="lazy-load"><a href="#lazy-load" class="headerlink" title="lazy load"></a>lazy load</h2><p>让路由组件在访问的时候才被加载.<br>AMD 风格<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> component = <span class="function"><span class="params">reslove</span> =&gt;</span> <span class="built_in">require</span>([<span class="string">'./foo.vue'</span>], reslove);</div></pre></td></tr></table></figure></p>
+<p>webpack语法<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> Foo = <span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</div><div class="line">  <span class="built_in">require</span>.ensure([<span class="string">'./Foo.vue'</span>], () =&gt; &#123;</div><div class="line">    resolve(<span class="built_in">require</span>(<span class="string">'./Foo.vue'</span>))</div><div class="line">  &#125;)</div><div class="line">&#125;</div><div class="line"><span class="comment">// 这样简洁一点</span></div><div class="line"><span class="keyword">const</span> Foo = <span class="function"><span class="params">r</span> =&gt;</span> <span class="built_in">require</span>.ensure([<span class="string">'./Foo.vue'</span>], () =&gt; resolve(<span class="built_in">require</span>(<span class="string">'./Foo.vue'</span>)), r)</div></pre></td></tr></table></figure></p>
+<p>###组件按组分块<br>如果要将某个路由的所有组件打包在某个异步的<code>chunk</code>中, 可以这样写<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> Foo = <span class="function"><span class="params">r</span> =&gt;</span> <span class="built_in">require</span>.ensure([], () =&gt; resolve(<span class="built_in">require</span>(<span class="string">'./Foo.vue'</span>)), <span class="string">'group: loginpage'</span>)</div><div class="line"><span class="keyword">const</span> Bar = <span class="function"><span class="params">r</span> =&gt;</span> <span class="built_in">require</span>.ensure([], () =&gt; resolve(<span class="built_in">require</span>(<span class="string">'./Foo.vue'</span>)), <span class="string">'group: loginpage'</span>)</div></pre></td></tr></table></figure></p>
+<p>Webpack 将相同 chunk 下的所有异步模块打包到一个异步块里面 —— 这也意味着我们无须明确列出 require.ensure 的依赖（传空数组就行）。</p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://gavin-gong.github.io/2016/10/30/vue-router-note/" data-id="ciuyux4sp0009jw504afy9qeu" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="http://gavin-gong.github.io/2016/10/30/vue-router-note/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://gavin-gong.github.io/2016/10/30/vue-router-note/">Comments</a>
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2016/10/29/crawler/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Older</strong>
+            <div class="article-nav-title">写个爬虫, 爬取学校招聘信息</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+</section>
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">recent</h3>
+        <div class="widget">
+            <ul id="recent-post" class="no-thumbnail">
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/FE/">FE</a></p>
+                            <p class="item-title"><a href="/2016/10/30/vue-router-note/" class="title">vue-router 笔记</a></p>
+                            <p class="item-date"><time datetime="2016-10-30T02:35:13.848Z" itemprop="datePublished">2016-10-30</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/FE/">FE</a></p>
+                            <p class="item-title"><a href="/2016/10/29/crawler/" class="title">写个爬虫, 爬取学校招聘信息</a></p>
+                            <p class="item-date"><time datetime="2016-10-29T09:06:58.172Z" itemprop="datePublished">2016-10-29</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/随感/">随感</a></p>
+                            <p class="item-title"><a href="/2016/10/24/about-interview/" class="title">一次奇葩的面试和反思</a></p>
+                            <p class="item-date"><time datetime="2016-10-24T13:25:54.389Z" itemprop="datePublished">2016-10-24</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/随感/">随感</a></p>
+                            <p class="item-title"><a href="/2016/10/22/find-job/" class="title">求职心态的变化以及计划</a></p>
+                            <p class="item-date"><time datetime="2016-10-22T10:59:41.660Z" itemprop="datePublished">2016-10-22</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/FE/">FE</a></p>
+                            <p class="item-title"><a href="/2016/10/18/gulp-learn/" class="title">gulp学习</a></p>
+                            <p class="item-date"><time datetime="2016-10-18T10:36:19.992Z" itemprop="datePublished">2016-10-18</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/FE/">FE</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/随感/">随感</a><span class="category-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">10</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">tags</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node/">Node</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/">Vue</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/">node</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工作/">工作</a><span class="tag-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2016 Gavin-Gong<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_config = function () {
+        
+            this.page.url = 'http://gavin-gong.github.io/2016/10/30/vue-router-note/';
+        
+        this.page.identifier = 'vue-router-note';
+    };
+    (function() { 
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'feway' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+
+
+    
+        <script src="/vendor/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/vendor/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/vendor/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/vendor/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/vendor/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/vendor/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/vendor/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/vendor/lightgallery/js/lg-share.min.js"></script>
+        <script src="/vendor/lightgallery/js/lg-video.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>
