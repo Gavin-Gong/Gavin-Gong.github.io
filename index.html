@@ -149,11 +149,11 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                10
+                11
                 <span>posts</span>
             </div>
             <div class="article-info-block">
-                5
+                6
                 <span>tags</span>
             </div>
         </div>
@@ -178,6 +178,140 @@
 
             
             <section id="main">
+    <article id="post-最近的学习心态" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2016/11/18/最近的学习心态/">最近写代码的心态</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2016/11/18/最近的学习心态/">
+            <time datetime="2016-11-18T11:09:16.593Z" itemprop="datePublished">2016-11-18</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/随感/">随感</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/学习/">学习</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>将近二十天没有写博客了, 这段时间一值在忙着学后端 (Express), 没时间写博客, 等项目写完会会解决掉遗留的问题, 写几篇博客总结. </p>
+<p>这将近二十天学习中, 从前端进入后端的世界, 因为之前写过<code>SPA</code>,  前端<code>SPA</code>的路由与后端的路由处理有着不小的相似之处, 又用的是<code>Node</code>又让难度降低不少. 因此一直想尽快把自己边学边写的项目尽快完成, 补完后端的短板再好好回过头搞前端, 因为想到前端自己还是有太多的东西不懂, 然后导致最近写代码心态有点炸毛, 每天整个人都有点抑郁了  ==!</p>
+<p>后来想起古龙小说中叶孤城的一句话 <code>你既学剑，就该知道学剑的人只要诚于剑，并不必诚于人</code> 对事物的追求都应该是追求其本身, 而非他的附加价值. 这样在整个过程中就能享受到更多的快乐.  自勉之!</p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://gavin-gong.github.io/2016/11/18/最近的学习心态/" data-id="civnpgtts000dvk508jlt56lt" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="http://gavin-gong.github.io/2016/11/18/最近的学习心态/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://gavin-gong.github.io/2016/11/18/最近的学习心态/">Comments</a>
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
     <article id="post-vue-router-note" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -239,7 +373,7 @@
 <h2 id="路由元信息"><a href="#路由元信息" class="headerlink" title="路由元信息"></a>路由元信息</h2><p>新玩意, 设置代码如下， 可以通过<code>$route.matched.requireAuth</code>访问, 钩子函数中的<code>to</code>, <code>from</code>实际上就是一个<code>$route</code>对象, <code>meta</code> 用来配置权限非常有用, 记得1.0 是没没有单独选项的<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">path</span>: <span class="string">'/'</span>,</div><div class="line">  <span class="attr">component</span>: Login,</div><div class="line">  <span class="attr">meta</span>: &#123;</div><div class="line">    <span class="attr">requireAuth</span>: <span class="literal">true</span>,</div><div class="line">  &#125;,</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <h2 id="滚动行为"><a href="#滚动行为" class="headerlink" title="滚动行为"></a>滚动行为</h2><p>只能在HTML5 <code>history</code>模式下有用, <code>savedPosition</code>当且仅当 popstate 导航 (通过浏览器的 前进/后退 按钮触发) 时才可用<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> VueRouter(&#123;</div><div class="line">  <span class="attr">routes</span>: [],</div><div class="line">  scrollBehavior (to, <span class="keyword">from</span>, savedPosition) &#123;</div><div class="line">    <span class="keyword">return</span> &#123;<span class="attr">x</span>: <span class="number">0</span>, <span class="attr">y</span>:<span class="number">0</span>&#125;</div><div class="line">    <span class="comment">// 或者</span></div><div class="line">    <span class="keyword">return</span> &#123;<span class="attr">selector</span>: <span class="string">'#app'</span>&#125; <span class="comment">// 返回一个选择器</span></div><div class="line">    <span class="keyword">return</span> &#123;<span class="attr">selector</span>: to.hash&#125; <span class="comment">// 滚动到锚点</span></div><div class="line">    <span class="keyword">return</span> <span class="literal">false</span> <span class="comment">// 不滚动</span></div><div class="line">    <span class="keyword">return</span> &#123;&#125; <span class="comment">// 不滚动</span></div><div class="line">  &#125;,</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
 <h2 id="lazy-load"><a href="#lazy-load" class="headerlink" title="lazy load"></a>lazy load</h2><p>让路由组件在访问的时候才被加载.<br>AMD 风格<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> component = <span class="function"><span class="params">reslove</span> =&gt;</span> <span class="built_in">require</span>([<span class="string">'./foo.vue'</span>], reslove);</div></pre></td></tr></table></figure></p>
-<p>webpack语法<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> Foo = <span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</div><div class="line">  <span class="built_in">require</span>.ensure([<span class="string">'./Foo.vue'</span>], () =&gt; &#123;</div><div class="line">    resolve(<span class="built_in">require</span>(<span class="string">'./Foo.vue'</span>))</div><div class="line">  &#125;)</div><div class="line">&#125;</div><div class="line"><span class="comment">// 这样简洁一点</span></div><div class="line"><span class="keyword">const</span> Foo = <span class="function"><span class="params">r</span> =&gt;</span> <span class="built_in">require</span>.ensure([<span class="string">'./Foo.vue'</span>], () =&gt; resolve(<span class="built_in">require</span>(<span class="string">'./Foo.vue'</span>)), r)</div></pre></td></tr></table></figure></p>
+<p>webpack语法<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> Foo = <span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</div><div class="line">  <span class="built_in">require</span>.ensure([<span class="string">'./Foo.vue'</span>], () =&gt; &#123;</div><div class="line">    resolve(<span class="built_in">require</span>(<span class="string">'./Foo.vue'</span>))</div><div class="line">  &#125;)</div><div class="line">&#125;</div><div class="line"><span class="comment">// 这样简洁一点</span></div><div class="line"><span class="keyword">const</span> Foo = <span class="function"><span class="params">r</span> =&gt;</span> <span class="built_in">require</span>.ensure([<span class="string">'./Foo.vue'</span>], () =&gt; r(<span class="built_in">require</span>(<span class="string">'./Foo.vue'</span>)))</div></pre></td></tr></table></figure></p>
 <p>###组件按组分块<br>如果要将某个路由的所有组件打包在某个异步的<code>chunk</code>中, 可以这样写<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> Foo = <span class="function"><span class="params">r</span> =&gt;</span> <span class="built_in">require</span>.ensure([], () =&gt; resolve(<span class="built_in">require</span>(<span class="string">'./Foo.vue'</span>)), <span class="string">'group: loginpage'</span>)</div><div class="line"><span class="keyword">const</span> Bar = <span class="function"><span class="params">r</span> =&gt;</span> <span class="built_in">require</span>.ensure([], () =&gt; resolve(<span class="built_in">require</span>(<span class="string">'./Foo.vue'</span>)), <span class="string">'group: loginpage'</span>)</div></pre></td></tr></table></figure></p>
 <p>Webpack 将相同 chunk 下的所有异步模块打包到一个异步块里面 —— 这也意味着我们无须明确列出 require.ensure 的依赖（传空数组就行）。</p>
 
@@ -252,7 +386,7 @@
 
 </div>
 
-    <a data-url="http://gavin-gong.github.io/2016/10/30/vue-router-note/" data-id="ciuyux4sp0009jw504afy9qeu" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://gavin-gong.github.io/2016/10/30/vue-router-note/" data-id="civnpgtua000gvk50168go60k" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -400,7 +534,7 @@
 
 </div>
 
-    <a data-url="http://gavin-gong.github.io/2016/10/29/crawler/" data-id="ciuyux4sx000djw50fmj79yl9" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://gavin-gong.github.io/2016/10/29/crawler/" data-id="civnpgtst0006vk504g4m4vh3" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -537,7 +671,7 @@
 
 </div>
 
-    <a data-url="http://gavin-gong.github.io/2016/10/24/about-interview/" data-id="ciuyux4pr0000jw504s7xci67" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://gavin-gong.github.io/2016/10/24/about-interview/" data-id="civnpgtr70000vk50tluas0vp" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -682,7 +816,7 @@
 
 </div>
 
-    <a data-url="http://gavin-gong.github.io/2016/10/22/find-job/" data-id="ciuyux4sa0008jw507tu79pev" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://gavin-gong.github.io/2016/10/22/find-job/" data-id="civnpgtt80008vk50sq958jar" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -840,7 +974,7 @@
 
 </div>
 
-    <a data-url="http://gavin-gong.github.io/2016/10/18/gulp-learn/" data-id="ciuyux4to000kjw503teelnh9" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://gavin-gong.github.io/2016/10/18/gulp-learn/" data-id="civnpgtwa000uvk504wxe0xwm" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -983,7 +1117,7 @@
 
 </div>
 
-    <a data-url="http://gavin-gong.github.io/2016/10/18/yarn/" data-id="ciuyux4u5000sjw50dd67m2lf" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://gavin-gong.github.io/2016/10/18/yarn/" data-id="civnpgtvc000nvk50a69k0ipv" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1129,7 +1263,7 @@
 
 </div>
 
-    <a data-url="http://gavin-gong.github.io/2016/10/14/迷之抓虫/" data-id="ciuyux4tt000njw50cd3asxi2" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://gavin-gong.github.io/2016/10/14/迷之抓虫/" data-id="civnpgtv0000kvk50tw4fdpt3" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1262,7 +1396,7 @@
 
 </div>
 
-    <a data-url="http://gavin-gong.github.io/2016/10/13/promise/" data-id="ciuyux4tb000gjw50dv1qfthc" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://gavin-gong.github.io/2016/10/13/promise/" data-id="civnpgttk0009vk50pn940ggs" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1394,7 +1528,7 @@
 
 </div>
 
-    <a data-url="http://gavin-gong.github.io/2016/10/11/fetch-api/" data-id="ciuyux4rj0006jw50khgwukms" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://gavin-gong.github.io/2016/10/11/fetch-api/" data-id="civnpgtvt000rvk50foaii57a" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1472,148 +1606,9 @@
 
 
 
-    <article id="post-async-wait" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2016/10/10/async-wait/">async/await</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2016/10/10/async-wait/">
-            <time datetime="2016-10-10T12:06:50.548Z" itemprop="datePublished">2016-10-10</time>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/FE/">FE</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/es6/">es6</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <h1 id="async-await"><a href="#async-await" class="headerlink" title="async/await"></a>async/await</h1><ul>
-<li><code>await</code>只能用于<code>async</code>函数中</li>
-<li><code>await</code>后面一般接一个promise对象，如不是<code>promise</code>对象, 则失去异步调用的作用</li>
-<li>async总是返回一个promise对象, 所以你可以在后面接then()</li>
-</ul>
-<h2 id="并发"><a href="#并发" class="headerlink" title="并发"></a>并发</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">foo</span> (<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">let</span> [a, b, c] = <span class="keyword">await</span> <span class="built_in">Promise</span>.all([p1, p2, p3]);</div><div class="line">  <span class="comment">// a, b, c 是对象promise对象执行后的resolve值</span></div><div class="line">  <span class="comment">// 或者这样</span></div><div class="line">  <span class="comment">// const all = Promise.all.bind(Promise);</span></div><div class="line">  <span class="comment">// let [a, b, c] = await all([p1, p2, p3]);</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">asyncFunction()</div><div class="line">	.then()</div><div class="line">	.catch(<span class="function"><span class="params">err</span> =&gt;</span> <span class="built_in">console</span>.log(err))</div></pre></td></tr></table></figure>
-<h3 id="循环多个await"><a href="#循环多个await" class="headerlink" title="循环多个await"></a>循环多个await</h3><p>如果要循环多个<code>await</code> 要注意<code>async 的上下文,</code>await要始终保持在它的上下文中,</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>].forEach( <span class="function"><span class="params">v</span> =&gt;</span> &#123;</div><div class="line">  <span class="keyword">await</span> sleep(<span class="number">1000</span>);</div><div class="line">  <span class="comment">// 这里的await并没有在`async`函数上下文中</span></div><div class="line">&#125;)</div><div class="line"></div><div class="line"><span class="comment">// 正确写法, 用for循环</span></div><div class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i <span class="keyword">of</span> [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]) &#123;</div><div class="line">  <span class="keyword">await</span> sleep(<span class="number">1000</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="await"><a href="#await" class="headerlink" title="await"></a>await</h3><p><code>await</code>后面接一个<code>promise</code>对象, 如果不是则不执行异步, 想到<code>Promise.resolve()</code>可以将转化为<code>promise</code>对象, 试了试如下代码</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">timeout</span>(<span class="params">ms</span>) </span>&#123;</div><div class="line">    setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> <span class="built_in">console</span>.log(<span class="string">'timeout'</span>), ms)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">asyncPrint</span>(<span class="params">value, ms</span>) </span>&#123;</div><div class="line">  <span class="keyword">await</span> <span class="built_in">Promise</span>.resolve(timeout(ms));</div><div class="line">  <span class="built_in">console</span>.log(value)</div><div class="line">&#125;</div><div class="line"></div><div class="line">asyncPrint(<span class="string">'hello world'</span>, <span class="number">50</span>); </div><div class="line"><span class="comment">// 'hello world'</span></div><div class="line"><span class="comment">// 'timeout'</span></div></pre></td></tr></table></figure>
-<p>并没有什么卵用.</p>
-
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="http://gavin-gong.github.io/2016/10/10/async-wait/" data-id="ciuyux4qv0002jw50wa78fp6o" class="article-share-link"><i class="fa fa-share"></i>Share</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-        <a href="http://gavin-gong.github.io/2016/10/10/async-wait/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://gavin-gong.github.io/2016/10/10/async-wait/">Comments</a>
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
+    <nav id="page-nav">
+        <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    </nav>
 </section>
             
                 <aside id="sidebar">
@@ -1623,6 +1618,15 @@
         <h3 class="widget-title">recent</h3>
         <div class="widget">
             <ul id="recent-post" class="no-thumbnail">
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/随感/">随感</a></p>
+                            <p class="item-title"><a href="/2016/11/18/最近的学习心态/" class="title">最近写代码的心态</a></p>
+                            <p class="item-date"><time datetime="2016-11-18T11:09:16.593Z" itemprop="datePublished">2016-11-18</time></p>
+                        </div>
+                    </li>
                 
                     <li>
                         
@@ -1660,15 +1664,6 @@
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/FE/">FE</a></p>
-                            <p class="item-title"><a href="/2016/10/18/gulp-learn/" class="title">gulp学习</a></p>
-                            <p class="item-date"><time datetime="2016-10-18T10:36:19.992Z" itemprop="datePublished">2016-10-18</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -1678,7 +1673,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">categories</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/FE/">FE</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/随感/">随感</a><span class="category-list-count">2</span></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/FE/">FE</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/随感/">随感</a><span class="category-list-count">3</span></li></ul>
         </div>
     </div>
 
@@ -1687,7 +1682,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">archives</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">10</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">10</span></li></ul>
         </div>
     </div>
 
@@ -1696,7 +1691,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">tags</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node/">Node</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/">Vue</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/">node</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工作/">工作</a><span class="tag-list-count">2</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node/">Node</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/">Vue</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/">node</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/学习/">学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工作/">工作</a><span class="tag-list-count">2</span></li></ul>
         </div>
     </div>
 
