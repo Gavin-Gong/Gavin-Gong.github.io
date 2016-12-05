@@ -197,6 +197,16 @@ code {
     margin: 0 0.769230769230769%;
   }
 }
+@media screen and (min-width: 560px) and (max-width: 799px) {
+  #main {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 559px) {
+  #main {
+    width: 100%;
+  }
+}
 .archive-article-header a,
 .layout-wrap-inner.tag-cloud a,
 .timeline-row .content h1 a,

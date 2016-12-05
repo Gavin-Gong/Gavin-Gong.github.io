@@ -149,7 +149,7 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                11
+                12
                 <span>posts</span>
             </div>
             <div class="article-info-block">
@@ -178,6 +178,147 @@
 
             
             <section id="main">
+    <article id="post-one_month_learn_back_end" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2016/12/04/one_month_learn_back_end/">后端开发学习之旅</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2016/12/04/one_month_learn_back_end/">
+            <time datetime="2016-12-04T11:52:34.230Z" itemprop="datePublished">2016-12-04</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/FE/">FE</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Node/">Node</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>大概从10月30开始学习Node后端, 到现在差不多一个月左右(中间玩了几天), 在某些方面我从来不是一个循规蹈矩的人, 所以我一开始就在按照自己的想法写, 写的同时也参考了很多教程, 源码, google某些功能是怎么实现的. 毕竟很多东西都是大同小异, 一法通万法通. 当然这也踩了不少的坑, 导致好几次都大面积重构代码.</p>
+<h3 id="梳理下遇到的知识点和坑"><a href="#梳理下遇到的知识点和坑" class="headerlink" title="梳理下遇到的知识点和坑"></a>梳理下遇到的知识点和坑</h3><h4 id="MiddleWare"><a href="#MiddleWare" class="headerlink" title="MiddleWare"></a>MiddleWare</h4><p>按照我的理解, 所谓的中间件就好像是一个个不同特质的过滤器, 当然有时候也可以充当开关的作用, 可以对传过来的参数进行处理(赋值, 添加方法……)之后然后再传递给下一个中间件, 有时候也可能立即终止了. 看下<code>express-flash</code>的代码.<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">exports = <span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">req, res, next</span>) </span>&#123;</div><div class="line">    connectFlash(req, res, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">      <span class="keyword">var</span> render = res.render;</div><div class="line">      res.render = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="comment">// 对render() 函数进行代理 </span></div><div class="line">        res.locals.messages = req.flash();</div><div class="line">        render.apply(res, <span class="built_in">arguments</span>);</div><div class="line">      &#125;</div><div class="line">      <span class="comment">// 流向下一个中间件</span></div><div class="line">      next();</div><div class="line">    &#125;)</div><div class="line">  &#125;;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<h4 id="session"><a href="#session" class="headerlink" title="session"></a>session</h4><p>session 常常拿来与 cookie 进行比较  cookie数据是存在客户端的, 而session数据则是存在服务的,<br>这样说还是不够清楚, session的主要数据虽然是存在服务器, 但是也会给网页设置一个sessionid (相当于一把钥匙), 当用户请求的时候就会携带sessionId, 当服务器读取到sessionId就是知道是谁, 不会把别人的个人数据发给你了.</p>
+<h4 id="Mongdb-数据库"><a href="#Mongdb-数据库" class="headerlink" title="Mongdb 数据库"></a>Mongdb 数据库</h4><p>说实话, 这是我第一次接触数据库,感觉数据库也是很深的坑, 在此不做展开.</p>
+<h4 id="Router-amp-Controller"><a href="#Router-amp-Controller" class="headerlink" title="Router &amp; Controller"></a>Router &amp; Controller</h4><p>这两者之间一度让我懵逼, <a href="http://softwareengineering.stackexchange.com/questions/135495/in-mvc-what-is-the-difference-between-controller-and-router" target="_blank" rel="external">link</a> controller -&gt; 基于请求的行为, 某种意义上的中间件 Rouetr -&gt;  指定 url 和 对应的controller</p>
+<h4 id="表单验证"><a href="#表单验证" class="headerlink" title="表单验证"></a>表单验证</h4><p>在做表单验证一个, 遭遇一个深坑,  刚开始我把表单验证写在controllers里面, 但是写着写着我发现, mongoose里面自带验证, -&gt; 我当时就想表单验证不会是要组织到Model里面吧? -&gt; 然后我又考虑了下Model是最贴近存储数据的 -&gt; Google到一些写php的回答, 建议写到Model里面, 我想了想尽管语言不同, 但是都是MVC, 应该是同样适用的.  后来请教一位前辈 :Model是禁止的做法,  写到middleware 才是推荐做法, 然后我又重构一次代码 .</p>
+<h4 id="git-报错"><a href="#git-报错" class="headerlink" title="git 报错"></a>git 报错</h4><p><code>error: RPC failed; result=52, HTTP code = 0fatal: The remote end hung up unexpectedly</code> 解决方法</p>
+<p><code>git config --global http.postBuffer 524288000</code></p>
+<p>后话</p>
+<p>好记性不如烂笔头, 当时写的时候想着, 等项目写完之后一起做下笔记总结, 但是到现在已经忘得差不多了.</p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://gavin-gong.github.io/2016/12/04/one_month_learn_back_end/" data-id="ciwbfvkyc0008nk509d1p6sp4" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="http://gavin-gong.github.io/2016/12/04/one_month_learn_back_end/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://gavin-gong.github.io/2016/12/04/one_month_learn_back_end/">Comments</a>
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
     <article id="post-最近的学习心态" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -234,7 +375,7 @@
 
 </div>
 
-    <a data-url="http://gavin-gong.github.io/2016/11/18/最近的学习心态/" data-id="civvwog71000f1g50t87bipzb" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://gavin-gong.github.io/2016/11/18/最近的学习心态/" data-id="ciwbfvkze000jnk50rmut7wmf" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -386,7 +527,7 @@
 
 </div>
 
-    <a data-url="http://gavin-gong.github.io/2016/10/30/vue-router-note/" data-id="civvwog6f00091g508s5c1ygn" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://gavin-gong.github.io/2016/10/30/vue-router-note/" data-id="ciwbfvl0f000onk50a56zq6c4" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -534,7 +675,7 @@
 
 </div>
 
-    <a data-url="http://gavin-gong.github.io/2016/10/29/crawler/" data-id="civvwog6s000d1g5054qhtb6z" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://gavin-gong.github.io/2016/10/29/crawler/" data-id="ciwbfvl00000lnk50m90q7wuc" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -671,7 +812,7 @@
 
 </div>
 
-    <a data-url="http://gavin-gong.github.io/2016/10/24/about-interview/" data-id="civvwog4100021g50zei3smiv" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://gavin-gong.github.io/2016/10/24/about-interview/" data-id="ciwbfvkx20002nk50yr73sc50" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -816,7 +957,7 @@
 
 </div>
 
-    <a data-url="http://gavin-gong.github.io/2016/10/22/find-job/" data-id="civvwog6000081g501q65pprv" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://gavin-gong.github.io/2016/10/22/find-job/" data-id="ciwbfvkwi0000nk50paepo7gn" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -974,7 +1115,7 @@
 
 </div>
 
-    <a data-url="http://gavin-gong.github.io/2016/10/18/gulp-learn/" data-id="civvwog92000t1g50skojpxah" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://gavin-gong.github.io/2016/10/18/gulp-learn/" data-id="ciwbfvkz0000dnk50ckdz4an6" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1117,7 +1258,7 @@
 
 </div>
 
-    <a data-url="http://gavin-gong.github.io/2016/10/18/yarn/" data-id="civvwog7o000j1g50oir6osoi" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://gavin-gong.github.io/2016/10/18/yarn/" data-id="ciwbfvl1p000vnk507zql4ng8" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1263,7 +1404,7 @@
 
 </div>
 
-    <a data-url="http://gavin-gong.github.io/2016/10/14/迷之抓虫/" data-id="civvwog8t000q1g50xkytglsv" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://gavin-gong.github.io/2016/10/14/迷之抓虫/" data-id="ciwbfvl0m000rnk50hm6yiq1y" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1396,7 +1537,7 @@
 
 </div>
 
-    <a data-url="http://gavin-gong.github.io/2016/10/13/promise/" data-id="civvwog84000m1g50hm8sey0c" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://gavin-gong.github.io/2016/10/13/promise/" data-id="ciwbfvkys0009nk50130j2f6p" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1474,138 +1615,6 @@
 
 
 
-    <article id="post-fetch-api" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2016/10/11/fetch-api/">fetch</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2016/10/11/fetch-api/">
-            <time datetime="2016-10-11T04:21:49.795Z" itemprop="datePublished">2016-10-11</time>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/FE/">FE</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/es6/">es6</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <h1 id="fetch-api"><a href="#fetch-api" class="headerlink" title="fetch api"></a>fetch api</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">fetch(<span class="string">'url'</span>, &#123;</div><div class="line">  <span class="attr">method</span>: <span class="string">'POST'</span>,</div><div class="line">  <span class="attr">headers</span>: &#123;</div><div class="line">    <span class="string">'Content-Type'</span>: <span class="string">'text/plain'</span>,</div><div class="line">  &#125;,</div><div class="line">  <span class="comment">// ......</span></div><div class="line">&#125;).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</div><div class="line">  </div><div class="line">&#125;).catch( <span class="function"><span class="params">err</span> =&gt;</span> &#123;</div><div class="line">  </div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="http://gavin-gong.github.io/2016/10/11/fetch-api/" data-id="civvwog5j00061g50mb7vxsb0" class="article-share-link"><i class="fa fa-share"></i>Share</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-        <a href="http://gavin-gong.github.io/2016/10/11/fetch-api/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://gavin-gong.github.io/2016/10/11/fetch-api/">Comments</a>
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
-
     <nav id="page-nav">
         <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
@@ -1618,6 +1627,15 @@
         <h3 class="widget-title">recent</h3>
         <div class="widget">
             <ul id="recent-post" class="no-thumbnail">
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/FE/">FE</a></p>
+                            <p class="item-title"><a href="/2016/12/04/one_month_learn_back_end/" class="title">后端开发学习之旅</a></p>
+                            <p class="item-date"><time datetime="2016-12-04T11:52:34.230Z" itemprop="datePublished">2016-12-04</time></p>
+                        </div>
+                    </li>
                 
                     <li>
                         
@@ -1655,15 +1673,6 @@
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/随感/">随感</a></p>
-                            <p class="item-title"><a href="/2016/10/22/find-job/" class="title">求职心态的变化以及计划</a></p>
-                            <p class="item-date"><time datetime="2016-10-22T10:59:41.660Z" itemprop="datePublished">2016-10-22</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -1673,7 +1682,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">categories</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/FE/">FE</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/随感/">随感</a><span class="category-list-count">3</span></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/FE/">FE</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/随感/">随感</a><span class="category-list-count">3</span></li></ul>
         </div>
     </div>
 
@@ -1682,7 +1691,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">archives</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">10</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">10</span></li></ul>
         </div>
     </div>
 
@@ -1691,7 +1700,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">tags</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node/">Node</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/">Vue</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/">node</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/学习/">学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工作/">工作</a><span class="tag-list-count">2</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node/">Node</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/">Vue</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/">node</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/学习/">学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工作/">工作</a><span class="tag-list-count">2</span></li></ul>
         </div>
     </div>
 
