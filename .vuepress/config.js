@@ -1,7 +1,7 @@
 module.exports = {
   title: 'Gavin Gong',
   description: 'Code & Life',
-  base: '/note/',
+  // base: '/note/',
   locales: {
     '/zh/': {
       lang: 'zh-CN',
