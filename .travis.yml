@@ -3,6 +3,10 @@ node_js:
   - "9"
 sudo: required
 
+branches:
+  only:
+  - gh-pages
+
 install:
   - npm i vuepress -g
 
