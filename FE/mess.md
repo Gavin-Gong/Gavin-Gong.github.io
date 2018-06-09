@@ -1,4 +1,4 @@
-### 最近遇到的坑
+### 最近开发的流水账
 
 > 2018-06-01 更新
 
@@ -9,7 +9,7 @@ overflow: scroll;
 -webkit-overflow-scrolling: touch;
 ```
 
-### inline 元素无法被 trnsdform
+### inline 元素无法被 transform
 
 
 ### line-height 在Android 无法垂直居中, 往上偏移
@@ -39,3 +39,20 @@ overflow: scroll;
 }
 ```
 3. 让字体不小于`12px` 然而这得设计师小姐姐说了算.
+
+### vue 自动化注册全局组件
+注册目录下所有的组件, 不包含子目录.
+``` js
+import Vue from 'vue'
+
+const ctx = require.context('./', false, /\.vue$/)
+ctx.keys().forEach(path => {
+  let component = ctx(path).default
+  if (component.name) {
+    Vue.component(component.name, component)
+  } else {
+    console.error('请为组件提供 name 选项')
+  }
+})
+```
+> [webpack](https://webpack.docschina.org/guides/dependency-management/)
