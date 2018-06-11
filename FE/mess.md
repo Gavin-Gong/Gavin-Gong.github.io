@@ -56,3 +56,11 @@ ctx.keys().forEach(path => {
 })
 ```
 > [webpack](https://webpack.docschina.org/guides/dependency-management/)
+
+
+### iOS 下日期格式化与 Android 不一致
+iOS下 `Date.parse("2018-10-10 10:10:10")` 会报错, 其他平台正常, 可以用以下方法保持兼容, chrome对于 `-` 和 `/` 分割日期的形式都是支持的, Safrai 只支持 `/`
+```
+new Date(timeStr.replace(/\-/g, '/')) // 本质上还是调用的 parse
+Date.parse(timeStr.replace(/\-/g, '/'))
+```
