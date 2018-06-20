@@ -160,8 +160,11 @@ c(b(a(foo)))
 // 变成下面这种形式的调用
 
 compose(c, b, a)(foo)
+
+// 如果是 pipe 的话
+pipe(a, b, c)(foo)
 ```
-我们可以看到它是从右往左的调用顺序， 尝试实现一个compose函数
+我们可以看到compose是从右往左的调用顺序， pipe是从左到右的数据流顺序， 尝试实现一个compose函数
 ``` js
 export const compose = (...args) => {
   let len = args.length;
@@ -185,14 +188,24 @@ export const compose1 = (...funcs) => {
   if (funcs.length === 1) {
     return funcs[0];
   }
-  return funcs.reduce((a, b) => (...args) => a(b(...args)));
+  return funcs.reduce((acc, fn) => (...args) => acc(fn(...args)));
 };
 ```
-
-pipe 于compsoe函数的差异只在于数据流动的方向
+或者
+```js
+export const composeN = (...fns) => v => {
+  return fns.reverse().reduce((acc, fn) => fn(acc) , v)
+}
+```
+pipe 于compsoe函数的差异只在于数据流动的方向, 所以pipe可以写为
+``` js
+export const pipe = (...fns) => v => {
+  return fns.reduce((acc, fn) => fn(acc) , v)
+}
+```
 
 ### 场景
-compose 函数可以很好地将存在数依赖关系的一系列函数串起来， 便于理解阅读
+compose, pipe 函数可以很好地将存在数依赖关系的一系列函数串起来， 便于理解阅读
 
 ### 链式调用
 
