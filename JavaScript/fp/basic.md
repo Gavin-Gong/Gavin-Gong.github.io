@@ -1,6 +1,6 @@
-## JavsScript 函数式学习手记
+# JavsScript 函数式学习手记
 
-### 目标 高阶函数
+## 目标 高阶函数
 - map
 - filter
 - some
@@ -80,6 +80,119 @@ const memoized = fn => {
   return (arg) => cacheMap[arg] || (cacheMap[arg] = fn(arg))
 }
 ```
+
+## 科里化 和 偏应用
+定义
+> 是把接受多个参数的函数变换成接受一个单一参数（最初函数的第一个参数）的函数，并且返回接受余下的参数而且返回结果的新函数的技术
+
+通俗易懂版本
+> 用闭包把参数保存起来，当参数的数量足够执行函数了，就开始执行函数
+
+比如
+``` js
+add(x, y, z)
+// 变成下面这中形式的调用
+
+const curryAdd = curry(add)
+curryAdd(x)(y)(z)
+```
+实现一个能够进行上面这种变化的函数
+``` js
+function curry(fn) {
+  let len = fn.length // 参数长度
+  args = args || [] // 保存每次调用传递进来的参数
+  return function judgeCurry (...arg) {
+    if (args.length < len) {
+      args = args.concat(arg)
+      return judgeCurry
+    } else {
+      return fn.apply(this, args)
+    }
+  }
+}
+```
+
+去掉args这个局部变量
+``` js
+function curry(fn) {
+  let len = fn.length
+  return function judgeCurry(..arg) {
+    if (arg.length < len) {
+      return (arg2) => judgeCurry.apply(null, arg.concat(arg2))
+    } else {
+      return fn.apply(this, arg)
+    }
+  }
+}
+```
+
+把len也去掉, es6 写法
+```js
+const curry = (fn) =>
+  judgeCurry(...arg) =>
+    args.length >= fn.length ? fn(...args) : (arg) => judgeCurry(...args, arg)
+```
+### 使用场景
+笼统来讲curry 在缓存数据的时候非常有用 那么有哪些具体的场景可以使用到curry呢
+#### React 绑定事件
+React 绑定事件一般会用 `bind`或者`arrow function`，我们也可以借助curry实现
+``` jsx
+<button onClick={curry(handleClick)(data)}>Click</button>
+```
+
+[def](https://zh.wikipedia.org/wiki/%E6%9F%AF%E9%87%8C%E5%8C%96)
+
+[curry](https://segmentfault.com/a/1190000008248646)
+
+[curry](https://github.com/mqyqingfeng/Blog/issues/42)
+
+[curry](https://github.com/MrErHu/blog/issues/8)
+
+[curry](https://juejin.im/post/5af13664f265da0ba266efcf)
+
+### compose & pipe
+compose 的定义
+> 串联函数， 将前一个函数的结果作为后一个函数的参数进行传递
+举个例子
+```js
+c(b(a(foo)))
+
+// 变成下面这种形式的调用
+
+compose(c, b, a)(foo)
+```
+我们可以看到它是从右往左的调用顺序， 尝试实现一个compose函数
+``` js
+export const compose = (...args) => {
+  let len = args.length;
+  let start = len - 1;
+  return (...args1) => {
+    let result = args[start].apply(this, args1); // 初始参数
+    let i = start;
+    while (i--) {
+      result = args[i].call(this, result);
+    }
+    return result;
+  };
+};
+```
+更加简洁的写法是利用reduce函数
+``` js
+export const compose1 = (...funcs) => {
+  if (funcs.length === 0) {
+    return arg => arg;
+  }
+  if (funcs.length === 1) {
+    return funcs[0];
+  }
+  return funcs.reduce((a, b) => (...args) => a(b(...args)));
+};
+```
+
+pipe 于compsoe函数的差异只在于数据流动的方向
+
+### 场景
+compose 函数可以很好地将存在数依赖关系的一系列函数串起来， 便于理解阅读
 
 ### 链式调用
 
