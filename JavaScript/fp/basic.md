@@ -207,7 +207,28 @@ export const pipe = (...fns) => v => {
 ### 场景
 compose, pipe 函数可以很好地将存在数依赖关系的一系列函数串起来， 便于理解阅读
 
-### 链式调用
+## 函子 (functor)
+函子是一个持有值的容器，是一个普通对象实现了map函数，在遍历每个对象值的时候生成一个新对象
+### Maybe
+```js
+const MayBe = function(val) {
+  this.val = val
+}
+MayBe.of = function(val) {
+  return new MayBe(val)
+}
+}
+MayBe.prototype.isNothing = function() {
+  return (this.value === null || this.value === undefined)
+}
+MayBe.prototype.map = function(fn) {
+  return this.isNothing() ? MayBe.of(null) : MayBe.of(fn(this.value))
+}
+```
+### Either
+### Pointed
+
+## 链式调用
 
 ### 禁咒
 - Monad
