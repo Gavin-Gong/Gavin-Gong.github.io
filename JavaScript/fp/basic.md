@@ -210,6 +210,7 @@ compose, pipe 函数可以很好地将存在数依赖关系的一系列函数串
 ## 函子 (functor)
 函子是一个持有值的容器，是一个普通对象实现了map函数，在遍历每个对象值的时候生成一个新对象
 ### Maybe
+Maybe 函子可以用于处理错误情况，在遇到错误情况的时候不至于中断执行。
 ```js
 const MayBe = function(val) {
   this.val = val
@@ -225,19 +226,57 @@ MayBe.prototype.map = function(fn) {
   return this.isNothing() ? MayBe.of(null) : MayBe.of(fn(this.value))
 }
 ```
+例如，以下代码并不会报错
+``` js
+Maybe.of(null).map(v => v.toUpperCase()).map(v => v['data'])
+```
+
 ### Either
-### Pointed
+Maybe 函子也仅仅事能保证运行不出错，如果我想精细地处理运行过程中的错误呢， 这个时候就引出 Either 函子， 看看它的实现吧
+``` js
 
-## 链式调用
+const Nothing = function (val) {
+  thi s.value = val
+}
+Nothing.of = function (val) {
+  return new Nothing(val)
+}
+Nothing.prototype.map = function () {
+  return this //注意这里返回 this
+}
 
-### 禁咒
-- Monad
-- Functors
-- curry
-- partial
-- pointfree
+const Some = function(val) {
+  this.value = val
+}
+Some.of = function(val) {
+  return new Some(val)
+}
+Some.prototype.map = function (fn) {
+  return Some.of(fn(this.value))
+}
+
+export {
+  Nothing,
+  Some
+}
+```
+实际运用，需要一个函数来处理
+``` js
+let fetchData = () => {
+  let res
+  try {
+    res = Some.of(fetch('xxxx'))
+  } catch(err) {
+    res = Nothing.of({msg: err.message})
+  }
+  return res
+}
+TODO:
+```
 
 
-
+### Promise
+Promise也是属于函子的一种
+看另一篇文章
 
 [函数式术语](https://github.com/gnipbao/iblog/issues/13)
