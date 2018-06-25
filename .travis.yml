@@ -11,7 +11,7 @@ install:
   - npm i vuepress -g
 
 script:
-  - npm run build
+  - npm run build && echo 'whisper-of-zen.me' > .vuepress/dist/CNAME
 
 deploy:
   provider: pages
