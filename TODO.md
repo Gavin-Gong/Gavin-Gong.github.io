@@ -5,6 +5,7 @@
 - [ ] 装饰器的使用
 - [ ] webpack 插件 & loader
 - [ ] websocket
+- [ ] Vue-cli 使用
 
 
 - fp + rx 2

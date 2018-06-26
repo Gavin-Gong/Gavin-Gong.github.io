@@ -87,3 +87,20 @@ nohup ./geth &
 ```bash
 tail -f nohup.out
 ```
+
+### 禁用单页应用 HTML 缓存
+
+以下代码可以禁用 html 文件缓存，
+
+```html
+<meta http-equiv="Expires" content="-1">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Cache-control" content="no-cache">
+<meta http-equiv="Cache" content="no-cache">
+```
+
+但是在某些浏览器还是没用，刷新缓存依赖于在请求页面加时间戳, 例如
+
+```js
+`www.foo.com?ts=${Date.now()}`;
+```
