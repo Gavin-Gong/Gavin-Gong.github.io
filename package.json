@@ -4,7 +4,8 @@
   "description": "Gavin Gong's note",
   "main": "index.js",
   "scripts": {
-    "build": "npx vuepress build ."
+    "build": "npx vuepress build .",
+    "dev": "npx vuepress dev ."
   },
   "repository": {
     "type": "git",

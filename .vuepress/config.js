@@ -1,6 +1,6 @@
 module.exports = {
-  title: 'Gavin Gong',
-  description: 'Code & Life',
+  title: 'Whisper of Zen',
+  description: ' ',
   // base: '/note/',
   locales: {
     '/zh/': {
