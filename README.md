@@ -8,6 +8,8 @@ footer: MIT Licensed | Copyright © 2018-present Gavin Gong
 
 [gin 学习笔记](/2018/07/gin-note.md)
 
+[nginx 学习手记](/2018/07/nginx-note.md)
+
 ---
 ### 待整理
 [踩坑流水账](/FE/mess.md)
