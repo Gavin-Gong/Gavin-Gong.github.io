@@ -10,8 +10,12 @@ footer: MIT Licensed | Copyright © 2018-present Gavin Gong
 
 [nginx 学习手记](/2018/07/nginx-note.md)
 
+[RxJS 进行状态管理](/2018/07/rxjs-state-manegment.md)
+
 ---
+
 ### 待整理
+
 [踩坑流水账](/FE/mess.md)
 
 [RxJS 学习手记](/JavaScript/RxJS/)

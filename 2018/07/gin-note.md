@@ -3,8 +3,8 @@
 ## 快速开始
 
 ```sh
-# 假定一下代码在 example.go 文件
-$ cat example.go
+# 假定以下代码在 example.go 文件
+cat example.go
 ```
 
 ```go
