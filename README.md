@@ -12,6 +12,8 @@ footer: MIT Licensed | Copyright © 2018-present Gavin Gong
 
 [RxJS 进行状态管理](/2018/07/rxjs-state-manegment.md)
 
+[ES6 装饰器](/2018/07/decorator.md)
+
 ---
 
 ### 待整理
