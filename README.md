@@ -14,6 +14,8 @@ footer: MIT Licensed | Copyright © 2018-present Gavin Gong
 
 [ES6 装饰器](/2018/07/decorator.md)
 
+[使用装饰器自动取消订阅 React 组件中的 RxJS 流](/2018/07/react-rxjs-auto-unsubscribe-decorator.md)
+
 ---
 
 ### 待整理
