@@ -72,3 +72,9 @@ class Items extends React.Component {
 通常，组件应该由数据的形状来定义
 
 > Since you’re often displaying a JSON data model to a user, you’ll find that if your model was built correctly, your UI (and therefore your component structure) will map nicely.
+
+## 保持 props 并行
+
+## 和你的队友沟通
+
+这些只是我自己对如何定义组件 api 的一些想法，它们可能无法满足您的需求。我能给出的最好建议是与您的队友交谈，创建 rfc 和 PRs，并尝试自述驱动开发。编写 React 组件很容易。为您的团队创建一个运行良好的组件库是值得花费时间和精力的。
