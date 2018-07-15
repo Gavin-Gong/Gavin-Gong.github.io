@@ -1,29 +1,44 @@
 module.exports = {
   title: 'Whisper of Zen',
-  description: ' ',
-  // base: '/note/',
+  description: '  ',
   locales: {
     '/zh/': {
       lang: 'zh-CN',
       title: '我的 blog',
-      description: '随便写写'
+      description: 'Whisper of Zen'
     }
   },
   themeConfig: {
-    nav: [{
-        text: '主页',
-        link: '/'
+    sidebar: [
+      {
+        title: '2018-07',
+        children: [
+          '/2018/07/react-rxjs-auto-unsubscribe-decorator',
+          '/2018/07/rxjs-state-manegment',
+          '/2018/07/decorator',
+          '/2018/07/nginx-note',
+          '/2018/07/gin-note',
+        ]
       },
       {
-        text: 'Go',
-        link: '/Go/'
+        title: '2018-06',
+        children: [
+          '/2018/06/js-fp-note',
+          '/2018/06/rxjs-operator-note',
+          '/2018/06/rxjs-subject-note',
+        ]
+      },
+    ],
+    nav: [{
+        text: '起源之地',
+        link: '/'
       },
       {
         text: 'Github',
         link: 'https://github.com/Gavin-Gong'
       },
     ],
-    lastUpdated: 'Last Updated',
+    lastUpdated: '最后更新于 ',
   },
   configureWebpack: {
     resolve: {

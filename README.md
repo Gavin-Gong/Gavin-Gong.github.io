@@ -1,29 +1,15 @@
 ---
-home: true
-sidebar: false
-footer: MIT Licensed | Copyright © 2018-present Gavin Gong
+home: false
+# heroImage: /avatar.jpg
+# actionText: 快速上手 →
+# actionLink: /zh/guide/
+# features:
+# - title: 简洁至上
+#   details: 以 Markdown 为中心的项目结构，以最少的配置帮助你专注于写作。
+# - title: Vue驱动
+#   details: 享受 Vue + webpack 的开发体验，在 Markdown 中使用 Vue 组件，同时可以使用 Vue 来开发自定义主题。
+# - title: 高性能
+#   details: VuePress 为每个页面预渲染生成静态的 HTML，同时在页面被加载的时候，将作为 SPA 运行。
+footer: MIT Licensed | Copyright © 2018 Gavin Gong
 ---
 
-### 2018-07
-
-[gin 学习笔记](/2018/07/gin-note.md)
-
-[nginx 学习手记](/2018/07/nginx-note.md)
-
-[RxJS 进行状态管理](/2018/07/rxjs-state-manegment.md)
-
-[ES6 装饰器](/2018/07/decorator.md)
-
-[使用装饰器自动取消订阅 React 组件中的 RxJS 流](/2018/07/react-rxjs-auto-unsubscribe-decorator.md)
-
----
-
-### 待整理
-
-[踩坑流水账](/FE/mess.md)
-
-[RxJS 学习手记](/JavaScript/RxJS/)
-
-[JWT](/Go/jwt-go)
-
-[Go 学习手记](/Go/)

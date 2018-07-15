@@ -3,7 +3,7 @@
 最近自己的一个项目使用了 RxJS 进行状态管理, 需要在组件中订阅流来获取全局状态， 但是在组件卸载的时候需要手动取消订阅流.
 这样写起来有点繁琐，所以考虑用装饰器简化下代码
 
-```ts
+```typescript
 import * as React from "react";
 import { Subscription } from "rxjs";
 import { action$, state$ } from "../store/store";
@@ -38,7 +38,7 @@ export default Artist;
 
 我们先实现一个组件卸载的时候取消订阅所有流的装饰器
 
-```ts
+```typescript
 import { Subscription } from "rxjs";
 
 /**
@@ -63,7 +63,7 @@ export function unsubscribeAll(target: any) {
 
 使用方法
 
-```ts
+```typescript
 @unsubscribeAll
 class Artist extends React.Component {
   // ...
@@ -72,7 +72,7 @@ class Artist extends React.Component {
 
 但是有时候我并不想取消所有的流，只是想取消订阅指定的流呢? 我们可以这样实现代码
 
-```ts
+```typescript
 /**
  * @desc 取消订阅某个 React 组件上的指定流
  * @param blacklist 要取消订阅的流
@@ -99,7 +99,7 @@ export function unsubscribe(...list: Array<string>) {
 
 使用方法
 
-```
+```typescript
 @unsubscribe("subscription1", "subscription2")
 class Artist extends React.Component {
   // ...
@@ -108,7 +108,7 @@ class Artist extends React.Component {
 
 RxJS 取消订阅并非只有`unsubscribe`， `takeUtil`和`take`等也是可以的, 例如
 
-```ts
+```typescript
 import * as React from "react";
 import { Subscription, Subject } from "rxjs";
 import { action$, state$ } from "../store/store";

@@ -1,3 +1,4 @@
+# RxJS Subject 学习
 ## Subject
 其实一个 `Observable` 可以被订阅多次, 但是并不共享一个流的数据,如下例
 ``` javascript

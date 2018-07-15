@@ -1,4 +1,4 @@
-# nginx
+# nginx 笔记
 
 ## macos 安装
 
