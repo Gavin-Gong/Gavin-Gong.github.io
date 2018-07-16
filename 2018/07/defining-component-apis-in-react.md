@@ -73,8 +73,136 @@ class Items extends React.Component {
 
 > Since you’re often displaying a JSON data model to a user, you’ll find that if your model was built correctly, your UI (and therefore your component structure) will map nicely.
 
+我经常看到 React 新手尝试复制我所说的 Bootstrap 组件，即具有视觉边界，但与任何数据结构都没有直接联系的 UI 组件。React 组件和 基于类 BEM 风格，基于 CSS 的组件有着不同的关注点。不是创建一个通用的卡片组件来显示图像、标题和链接，而这需要一个定制的 props API，而是为你需要展示的数据构建组件。也许通用的 Card 组件应该是一个接受来自数据库的 product 对象的 ProductCard 组件。
+
+```jsx
+// 不要这样做
+<Card
+  image={product.thumbnail}
+  title={product.name}
+  text={product.description}
+  link={product.permalink}
+/>
+
+// 这样做
+<ProductCard {...product} />
+```
+
+很可能，你需要的 ProductCard 的特定样式并不都是可重用的，而且你可能只在代码库中的一个地方定义了这个样式。在这种情况下，你可以遵循 Rule of Three 。如果你已经在代码库中三次复制了 Card 组件结构，那么可能值得将其抽象出自有组件。
+
+## 避免繁多的 props
+
+正如 Jenn Creighton 所说，避免 繁多的 props。不要害怕创建一个新的组件，而不是向组件添加一些任意的 props 和附加的逻辑。例如，Button 组件可以接受不同颜色、大小和形状的 props，但并不总是需要这么多的 props。
+
+```jsx
+// Instead of this
+<Button
+  variant='secondary'
+  size='large'
+  outline
+  label='Buy Now'
+  icon='shoppingBag'
+  onClick={handleClick}
+/>
+
+// Do this
+<SecondaryButton
+  size='large'
+  onClick={handleClick}>
+  <Icon name='shoppingBag' />
+  Buy Now
+</SecondaryButton>
+```
+
+您的需求可能会有所不同，但是减少组件所需的自定义 props 的数量通常很有帮助，并且减少 render 函数中的逻辑数量可以使代码库更简单，更适合于代码分割。
+
+## 使用组合
+
+不要重新发明 `props.children`。如果你已经定义了 props 接收不基于数据结构的任意文本字符串的道具，那么最好使用组合。
+
+```jsx
+// 不要这样写
+<Header
+  title='Hello'
+  subhead='This is a header'
+  text='And it has arbitrary props'
+/>
+
+// 这样写
+<Header>
+  <Heading>Hello</Heading>
+  <Subhead>This is a header</Subhead>
+  <Text>And it uses composition</Text>
+</Header>
+```
+
+如果你熟悉 React，那么你可能已经知道了组合版本的 API，它不会像之前那样需要那么多的文档。在你的应用中，你可以将组合版本的组件封装到另一个与数据结构绑定组件中，而且你可能只需要在代码库中定义一次组件结构。
+
+```jsx
+// 对于一个基于数据的组件而言，这样写很有用
+const PageHeader = ({
+  title,
+  description
+}) =>
+  <Header>
+    <Heading>{title}</Heading>
+    <Text>{description}</Text>
+  </Header>
+
+// 理想情况下可以这样使用
+<PageHeader {...page} />
+```
+
+## 避免枚举布尔 props
+
+使用布尔 props 是一种在组件变量之间进行切换的便捷方式，这很有吸引力，但它有时会产生一个令人困惑的 API。
+查看下面的例子：
+
+```jsx
+<Button primary />
+<Button secondary />
+```
+
+下面的情况会发生什么?
+
+```jsx
+<Button primary secondary />
+```
+
+如果不深入到代码库或文档中，就无法理解。相反，试试以下：
+
+```jsx
+<Button variant="primary" />
+```
+
+这样需要打更多的字，但是可以说更加具有可读性。
+
 ## 保持 props 并行
+
+只要有可能，复用其他组件的 props。例如，如果你正在写一个日期选择器，请使用与原生 `<input type='date' />` 相同的 props。这样将更容易猜测组件是如何运作的，也更容易被记住。
+
+```jsx
+// 不要这样写
+<DatePicker
+  date={date}
+  onSelect={handleDateChange}
+/>
+
+// 这样写
+<DatePicker
+  value={date}
+  onChange={handleDateChange}
+/>
+```
+
+Styled System 库鼓励跨多个组件使用并行风格的 props API。例如，color props 对 Rebass 中的所有组件都起作用， 最终达到一次学习，到处使用的效果。
+
+```jsx
+// 来自 Rebass 的例子
+<Box color='tomato' />
+<Heading color='tomato' />
+```
 
 ## 和你的队友沟通
 
-这些只是我自己对如何定义组件 api 的一些想法，它们可能无法满足您的需求。我能给出的最好建议是与您的队友交谈，创建 rfc 和 PRs，并尝试自述驱动开发。编写 React 组件很容易。为您的团队创建一个运行良好的组件库是值得花费时间和精力的。
+这些只是我自己对如何定义组件 api 的一些想法，它们可能无法满足您的需求。我能给出的最好建议是与您的队友交谈，创建 rfc 和 PRs，并尝试自述驱动开发。编写 React 组件很容易。为你的团队创建一个运行良好的组件库花费时间和精力是非常值得的。

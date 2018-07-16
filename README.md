@@ -13,3 +13,12 @@ home: false
 footer: MIT Licensed | Copyright © 2018 Gavin Gong
 ---
 
+## 吾生也有涯，而知也无涯
+
+- 设计 log 系统
+- tree shaking
+- event loop
+
+## 以有涯随无涯
+
+- 装饰器
