@@ -1,6 +1,6 @@
 # 『翻译』设计 React 组件 API
 
-多年来，我注意到处理组件 api 和构建应用程序和库方面的模式。以下是一系列如何设计组件 api 的想法、观点和建议，这会让组件会更灵活、更具有组合性、更容易理解。这些规则都不是硬性的，但它们帮助我想明白了如何组织和创建组件。
+多年来，我注意到自己在处理组件 api 和构建应用程序和库方面有一系列模式。以下是一系列如何设计组件 api 的想法、观点和建议，这会让组件更灵活、更具有组合性、更容易理解。这些规则都不是硬性的，但它们帮助我想明白了如何组织和创建组件。
 
 ## 提供最少的 API
 
@@ -14,7 +14,7 @@
 
 ## 避免 renderXXX 方法
 
-如果您在组件中定义了以 render 开头的自定义方法，那么它很可能应该被定义为自有组件。正如 [Chris Biscardi](https://mobile.twitter.com/chrisbiscardi/status/1004559213320814592) 所说，**“[It] effectively means there’s enough complexity to be worth breaking down”**。React 能明智地决定是否渲染的时机，因此，将这些组件拆分为自有组件，可以帮助 React 更好地运行。
+如果您在组件中定义了以 render 开头的自定义方法，那么它很可能应该被定义为自有组件。正如 [Chris Biscardi](https://mobile.twitter.com/chrisbiscardi/status/1004559213320814592) 所说，**“高效意味着有有足够的复杂度值得被分解”**。React 能明智地决定是否渲染的时机，因此，将这些组件拆分为自有组件，可以帮助 React 更好地运行。
 
 ```jsx
 // 不要这样写
@@ -71,11 +71,11 @@ class Items extends React.Component {
 
 通常，组件应该由数据的形状来定义
 
-> Since you’re often displaying a JSON data model to a user, you’ll find that if your model was built correctly, your UI (and therefore your component structure) will map nicely.
+> 既然你经常向用户展示 JSON 数据模型，你会发现，如果你的模型构建正确，你的 UI（以及你的组件结构）会被很好地映射
 
-– [Thinking in React](https://facebook.github.io/react/docs/thinking-in-react.html)
+– [React 理念](https://facebook.github.io/react/docs/thinking-in-react.html)
 
-我经常看到 React 新手尝试复制我所说的 [Bootstrap](https://getbootstrap.com) 组件，即具有视觉边界，但与任何数据结构都没有直接联系的 UI 组件。React 组件和 基于类 BEM 风格，基于 CSS 的组件有着不同的关注点。不应该创建一个需要定制 props 的通用卡片组件来显示图像、标题和链接，而是为你需要展示的数据创建组件。也许通用的 Card 组件应该是一个接受来自数据库的 product 对象的 ProductCard 组件。
+我经常看到 React 新手尝试复制我所说的 [Bootstrap](https://getbootstrap.com) 组件，即具有视觉边界，但与任何数据结构都没有直接联系的 UI 组件。React 组件和 BEM 风格、基于 CSS 的组件有着不同的关注点。不应该创建一个需要定制 props 的通用卡片组件来显示图像、标题和链接，而是为你需要展示的数据创建组件。也许通用的 Card 组件应该是一个接受来自数据库的 product 对象的 ProductCard 组件。
 
 ```jsx
 // 不要这样写
@@ -90,14 +90,14 @@ class Items extends React.Component {
 <ProductCard {...product} />
 ```
 
-很可能，你需要的 ProductCard 的特定样式并不都是可重用的，而且你可能只在代码库中的一个地方定义了这个样式。在这种情况下，你可以遵循 [三次法则](https://en.wikipedia.org/wiki/Rule_of_three_(computer_programming))。如果你已经在代码库中三次复制了 Card 组件结构，那么可能值得将其抽象出自有组件。
+很可能，你需要的 ProductCard 的特定样式并不都是可重用的，而且你可能只在代码库中的一个地方定义了这个样式。在这种情况下，你可以遵循 [三次法则](<https://en.wikipedia.org/wiki/Rule_of_three_(computer_programming)>)。如果你已经在代码库中复制了三次 Card 组件结构，那么将其抽象出自有组件可能是值得的。
 
 ## 避免繁多的 props
 
 正如 [Jenn Creighton](https://twitter.com/gurlcode) 所说，避免 [繁多的 props]((https://speakerdeck.com/jenncreighton/flexible-architecture-for-react-components?slide=10))。不要害怕创建一个新的组件，而不是向组件添加一些任意的 props 和附加的逻辑。例如，Button 组件可以接受不同颜色、大小和形状的 props，但并不总是需要这么多的 props。
 
 ```jsx
-// Instead of this
+// 不要这要写
 <Button
   variant='secondary'
   size='large'
@@ -107,7 +107,7 @@ class Items extends React.Component {
   onClick={handleClick}
 />
 
-// Do this
+// 这要写
 <SecondaryButton
   size='large'
   onClick={handleClick}>
@@ -181,7 +181,7 @@ const PageHeader = ({
 
 ## 保持 props 并行
 
-只要有可能，复用其他组件的 props。例如，如果你正在写一个日期选择器，请使用与原生 `<input type='date' />` 相同的 props。这样将更容易猜测组件是如何运作的，也更容易被记住。
+只要有可能，复用其他组件的 props。例如，如果你正在写一个日期选择器，请使用与原生 `<input type='date' />` 相同的 props。这样将更容易猜测组件是如何运作的，也更容易记住这些 api。
 
 ```jsx
 // 不要这样写
@@ -197,7 +197,7 @@ const PageHeader = ({
 />
 ```
 
-[Styled System](https://jxnblk.com/styled-system) 库鼓励跨多个组件使用并行风格的 props API。例如，color props 对 [Rebass](https://jxnblk.com/rebass) 中的所有组件都起作用， 最终达到一次学习，到处使用的效果。
+[Styled System](https://jxnblk.com/styled-system) 库鼓励跨多个组件使用并行风格的 props API。例如，color props 对 [Rebass](https://jxnblk.com/rebass) 中的所有组件都起作用，最终达到一次学习，到处使用的效果。
 
 ```jsx
 // 来自 Rebass 的例子
@@ -208,3 +208,6 @@ const PageHeader = ({
 ## 和你的队友沟通
 
 这些只是我自己对如何定义组件 api 的一些想法，它们可能无法满足您的需求。我能给出的最好建议是与你的队友沟通，创建 RFC 和 PR，并尝试 [Readme 驱动开发](https://ponyfoo.com/articles/readme-driven-development)。编写 React 组件很容易。为你的团队创建一个运行良好的组件库花费时间和精力是非常值得的。
+
+
+> 原文地址：[Defining Component APIs in React](http://jxnblk.com/writing/posts/defining-component-apis-in-react/)
