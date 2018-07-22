@@ -14,8 +14,8 @@ footer: MIT Licensed | Copyright © 2018 Gavin Gong
 - event loop
 - vue-async-computed
 - CSS 垂直自适应
-- [Ultimate React Component Patterns with Typescript 2.8](https://levelup.gitconnected.com/ultimate-react-component-patterns-with-typescript-2-8-82990c516935)
 
 ## 以有涯随无涯
 
 - 装饰器
+- ts 工具泛型
