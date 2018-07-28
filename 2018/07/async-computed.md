@@ -16,7 +16,7 @@ new Vue({
 }
 ```
 
-好奇其中原理, 看了源码, 了解其中巧妙的实现思路, 绘制了一张核心思路的原型图.
+好奇其中原理, 看了源码, 了解其中巧妙的实现思路, 绘制了一张核心思路的原型图 ![](http://opazkqh2d.bkt.clouddn.com/18-7-28/27548766.jpg).
 
 接下来我们实现一个简(阉)易(割)版本的 `vue-async-computed` 插件,
 
@@ -31,12 +31,10 @@ Vue.mixin({
 
       // 遍历 asyncComputed 注册 key
       for (const key in this.$options.asyncComputed || {}) {
-        data[key] = null;
+        _data[key] = null;
       }
-
-      return data;
+      return _data ? _data : {};
     };
-  }
 });
 ```
 
@@ -47,7 +45,10 @@ const prefix = "async$";
 Vue.mixin({
   beforeCreate() {
     for (const key in this.$options.asyncComputed || {}) {
-      this.$options.computed[prefix + key] = this.$options.asyncComputed[key]; // 绑定加前缀的计算属性
+      if (!this.$options.computed) {
+        this.$options.computed = {};
+      }
+      this.$options.computed[prefix + key] = this.$options.asyncComputed[key];
     }
   }
 });
@@ -76,3 +77,8 @@ Vue.mixin({
   }
 });
 ```
+
+以上只是简单的实现, 源码其实还包括 lazy 计算属性, 默认值, 错误处理等特性, 具体可以看源码. 这是注释版源码
+[vue-async-computed](https://github.com/Gavin-Gong/source/tree/master/vue-async-computed)
+
+> 2018-07-28

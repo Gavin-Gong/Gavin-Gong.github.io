@@ -13,6 +13,7 @@ module.exports = {
       {
         title: '2018-07',
         children: [
+          '/2018/07/async-computed',
           '/2018/07/ts-util-generic',
           '/2018/07/defining-component-apis-in-react',
           '/2018/07/react-rxjs-auto-unsubscribe-decorator',
