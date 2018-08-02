@@ -14,10 +14,10 @@ footer: MIT Licensed | Copyright © 2018 Gavin Gong
 - 设计 log 系统
 - tree shaking
 - event loop
-- vue-async-computed
 - CSS 垂直自适应
 
 ## 以有涯随无涯
 
+- vue-async-computed
 - 装饰器
 - ts 工具泛型

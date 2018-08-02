@@ -104,3 +104,21 @@ tail -f nohup.out
 ```js
 `www.foo.com?ts=${Date.now()}`;
 ```
+
+### 多重三元表达式
+
+```js
+var func1 = function( .. ) {
+  if (condition1) { return value1 }
+  else if (condition2) { return value2 }
+  else if (condition3) { return value3 }
+  else { return value4 }
+}
+
+var func2 = function( .. ) {
+  return condition1 ? value1
+       : condition2 ? value2
+       : condition3 ? value3
+       :              value4
+}
+```
