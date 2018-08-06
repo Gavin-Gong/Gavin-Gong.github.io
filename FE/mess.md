@@ -122,3 +122,13 @@ var func2 = function( .. ) {
        :              value4
 }
 ```
+
+### requestAnimationFrame 基本套路
+
+```js
+function repeatOften() {
+  // Do whatever
+  requestAnimationFrame(repeatOften);
+}
+requestAnimationFrame(repeatOften);
+```
