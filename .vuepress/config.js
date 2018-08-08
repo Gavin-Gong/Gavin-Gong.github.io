@@ -11,6 +11,12 @@ module.exports = {
   themeConfig: {
     sidebar: [
       {
+        title: '2018-08',
+        children: [
+          '/2018/08/scheduler-and-eventloop·'
+        ]
+      },
+      {
         title: '2018-07',
         children: [
           '/2018/07/async-computed',
