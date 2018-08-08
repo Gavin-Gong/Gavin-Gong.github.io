@@ -13,7 +13,7 @@ module.exports = {
       {
         title: '2018-08',
         children: [
-          '/2018/08/scheduler-and-eventloop·'
+          '/2018/08/scheduler-and-eventloop'
         ]
       },
       {
