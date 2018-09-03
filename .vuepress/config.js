@@ -1,6 +1,7 @@
 module.exports = {
   title: 'Whisper of Zen',
   description: '  ',
+  ga: 'UA-125056169-1',
   locales: {
     '/zh/': {
       lang: 'zh-CN',
