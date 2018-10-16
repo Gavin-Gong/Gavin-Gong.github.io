@@ -19,7 +19,14 @@ module.exports = {
           ]
         }
       ],
-      "/": [{
+      "/": [
+        {
+          title: '2018-10',
+          children: [
+            '/2018/10/vue-trick',
+          ]
+        },
+        {
           title: '2018-08',
           children: [
             '/2018/08/translate-js-side-effect',
